@@ -3,15 +3,37 @@
 #include <vector>
 #include <algorithm>
 #include <climits>
+#include <map>
+#include <string>
 #include "Observer.h"
+#include "SensorType.h"
 
 using namespace std;
 
 struct SWeatherInfo
 {
-	double temperature = 0;
-	double humidity = 0;
-	double pressure = 0;
+	std::map<SensorType, double> sensorData;
+};
+
+struct SensorDescripion
+{
+	static const std::string GetDescription(SensorType type)
+	{
+		switch (type)
+		{
+		case SensorType::Temperature:
+			return "Temperature";
+			break;
+		case SensorType::Humidity:
+			return "Humididty";
+			break;
+		case SensorType::Pressure:
+			return "Pressure";
+			break;
+		default:
+			return "Unknown sensor";
+		}
+	}
 };
 
 class CDisplay: public IObserver<SWeatherInfo>
@@ -19,9 +41,11 @@ class CDisplay: public IObserver<SWeatherInfo>
 public:
 	void Update(SWeatherInfo const& data) override
 	{
-		std::cout << "Current Temp " << data.temperature << std::endl;
-		std::cout << "Current Hum " << data.humidity << std::endl;
-		std::cout << "Current Pressure " << data.pressure << std::endl;
+		for (auto & info : data.sensorData)
+		{
+			std:cout << "Current " << SensorDescripion::GetDescription(info.first)  << " " << info.second << std::endl;
+		}
+
 		std::cout << "----------------" << std::endl;
 	}
 };
@@ -31,15 +55,20 @@ class CStatsDisplay : public IObserver<SWeatherInfo>
 public:
 	void Update(SWeatherInfo const& data) override
 	{
-		if (m_minTemperature > data.temperature)
+		for (auto & data : data.sensorData)
 		{
-			m_minTemperature = data.temperature;
+
 		}
-		if (m_maxTemperature < data.temperature)
-		{
-			m_maxTemperature = data.temperature;
-		}
-		m_accTemperature += data.temperature;
+
+		//if (m_minTemperature > data.temperature)
+		//{
+		//	m_minTemperature = data.temperature;
+		//}
+		//if (m_maxTemperature < data.temperature)
+		//{
+		//	m_maxTemperature = data.temperature;
+		//}
+		//m_accTemperature += data.temperature;
 		++m_countAcc;
 
 		std::cout << "Max Temp " << m_maxTemperature << std::endl;
@@ -48,6 +77,8 @@ public:
 		std::cout << "----------------" << std::endl;
 	}
 private:
+	std::map<SensorType, double> m_minTemp;
+
 	double m_minTemperature = std::numeric_limits<double>::infinity();
 	double m_maxTemperature = -std::numeric_limits<double>::infinity();
 	double m_accTemperature = 0;
@@ -91,9 +122,13 @@ protected:
 	SWeatherInfo GetChangedData()const override
 	{
 		SWeatherInfo info;
-		info.temperature = GetTemperature();
-		info.humidity = GetHumidity();
-		info.pressure = GetPressure();
+		info.sensorData[SensorType::Temperature] = GetTemperature();
+		info.sensorData[SensorType::Humidity] = GetHumidity();
+		info.sensorData[SensorType::Pressure] = GetPressure();
+		
+		//info.temperature = GetTemperature();
+		//info.humidity = GetHumidity();
+		//info.pressure = GetPressure();
 		return info;
 	}
 private:

@@ -2,6 +2,7 @@
 
 #include <set>
 #include <functional>
+#include "boost\heap\fibonacci_heap.hpp"
 
 /*
 Шаблонный интерфейс IObserver. Его должен реализовывать класс, 
@@ -41,6 +42,7 @@ public:
 	void RegisterObserver(ObserverType & observer) override
 	{
 		m_observers.insert(&observer);
+		m_hObservers.push(&observer);
 	}
 
 	void NotifyObservers() override
@@ -50,11 +52,29 @@ public:
 		{
 			observer->Update(data);
 		}
-	}
 
+		for (auto & obs : m_hObservers)
+		{
+			obs->Update(data);
+		}
+	}
+		
 	void RemoveObserver(ObserverType & observer) override
 	{
+		//auto that = m_observers.find(&observer);
+		//if (that == this)
+		//{
+		//	std::cout << "Try delete myself" << std::endl;
+		//	return;
+		//}
 		m_observers.erase(&observer);
+
+		for (auto it = m_hObservers.begin(); it != m_hObservers.end();++it)
+		{
+			auto a = decltype(m_hObservers)::s_handle_from_iterator(it);
+			m_hObservers.erase(a);
+		}
+		
 	}
 
 protected:
@@ -64,4 +84,5 @@ protected:
 
 private:
 	std::set<ObserverType *> m_observers;
+	boost::heap::fibonacci_heap<ObserverType *> m_hObservers;
 };

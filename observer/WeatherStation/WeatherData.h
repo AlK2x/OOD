@@ -15,27 +15,6 @@ struct SWeatherInfo
 	std::map<SensorType, double> sensorData;
 };
 
-struct SensorDescripion
-{
-	static const std::string GetDescription(SensorType type)
-	{
-		switch (type)
-		{
-		case SensorType::Temperature:
-			return "Temperature";
-			break;
-		case SensorType::Humidity:
-			return "Humididty";
-			break;
-		case SensorType::Pressure:
-			return "Pressure";
-			break;
-		default:
-			return "Unknown sensor";
-		}
-	}
-};
-
 class CDisplay: public IObserver<SWeatherInfo>
 {
 public:
@@ -43,7 +22,7 @@ public:
 	{
 		for (auto & info : data.sensorData)
 		{
-			std:cout << "Current " << SensorDescripion::GetDescription(info.first)  << " " << info.second << std::endl;
+			std:cout << "Current " << SensorInfo::getDescription(info.first)  << " " << info.second << std::endl;
 		}
 
 		std::cout << "----------------" << std::endl;
@@ -53,37 +32,38 @@ public:
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
 public:
+	CStatsDisplay()
+	{
+		for (auto & sensorInfo : SENSOR_INFOS)
+		{
+			m_minSensorValue[sensorInfo.type] = std::numeric_limits<double>::infinity();
+			m_maxSensorValue[sensorInfo.type] = -std::numeric_limits<double>::infinity();
+			m_accSensorValue[sensorInfo.type] = 0;
+		}
+	}
+
 	void Update(SWeatherInfo const& data) override
 	{
-		for (auto & data : data.sensorData)
+		for (auto & info : data.sensorData)
 		{
+			m_maxSensorValue[info.first] = std::max(m_maxSensorValue[info.first], info.second);
+			m_minSensorValue[info.first] = std::min(m_minSensorValue[info.first], info.second);
+			m_accSensorValue[info.first] += info.second;
 
+			std::cout << "Max " << SensorInfo::getDescription(info.first) << " " << m_maxSensorValue[info.first] << std::endl;
+			std::cout << "Min " << SensorInfo::getDescription(info.first) << " " << m_minSensorValue[info.first] << std::endl;
+			std::cout << "Average " << SensorInfo::getDescription(info.first) << " " << (m_accSensorValue[info.first] / m_countAcc) << std::endl;
 		}
-
-		//if (m_minTemperature > data.temperature)
-		//{
-		//	m_minTemperature = data.temperature;
-		//}
-		//if (m_maxTemperature < data.temperature)
-		//{
-		//	m_maxTemperature = data.temperature;
-		//}
-		//m_accTemperature += data.temperature;
 		++m_countAcc;
-
-		std::cout << "Max Temp " << m_maxTemperature << std::endl;
-		std::cout << "Min Temp " << m_minTemperature << std::endl;
-		std::cout << "Average Temp " << (m_accTemperature / m_countAcc) << std::endl;
+		
 		std::cout << "----------------" << std::endl;
 	}
 private:
-	std::map<SensorType, double> m_minTemp;
+	std::map<SensorType, double> m_minSensorValue;
+	std::map<SensorType, double> m_maxSensorValue;
+	std::map<SensorType, double> m_accSensorValue;
 
-	double m_minTemperature = std::numeric_limits<double>::infinity();
-	double m_maxTemperature = -std::numeric_limits<double>::infinity();
-	double m_accTemperature = 0;
 	unsigned m_countAcc = 0;
-
 };
 
 class CWeatherData : public CObservable<SWeatherInfo>
@@ -97,12 +77,12 @@ public:
 	// Относительная влажность (0...100)
 	double GetHumidity()const
 	{
-		return humidity;
+		return m_humidity;
 	}
 	// Атмосферное давление (в мм.рт.ст)
 	double GetPressure()const
 	{
-		return pressure;
+		return m_pressure;
 	}
 
 	void MeasurementsChanged()
@@ -112,9 +92,9 @@ public:
 
 	void SetMeasurements(double temp, double humidity, double pressure)
 	{
-		humidity = humidity;
+		m_humidity = humidity;
 		m_temperature = temp;
-		pressure = pressure;
+		m_pressure = pressure;
 
 		MeasurementsChanged();
 	}
@@ -122,17 +102,14 @@ protected:
 	SWeatherInfo GetChangedData()const override
 	{
 		SWeatherInfo info;
-		info.sensorData[SensorType::Temperature] = GetTemperature();
-		info.sensorData[SensorType::Humidity] = GetHumidity();
-		info.sensorData[SensorType::Pressure] = GetPressure();
+		info.sensorData[SensorType::TEMPERATURE] = GetTemperature();
+		info.sensorData[SensorType::HUMIDITY] = GetHumidity();
+		info.sensorData[SensorType::PRESSURE] = GetPressure();
 		
-		//info.temperature = GetTemperature();
-		//info.humidity = GetHumidity();
-		//info.pressure = GetPressure();
 		return info;
 	}
 private:
 	double m_temperature = 0.0;
-	double humidity = 0.0;	
-	double pressure = 760.0;	
+	double m_humidity = 0.0;	
+	double m_pressure = 760.0;	
 };

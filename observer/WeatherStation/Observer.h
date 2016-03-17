@@ -2,7 +2,6 @@
 
 #include <set>
 #include <functional>
-#include "boost\heap\fibonacci_heap.hpp"
 
 /*
 Шаблонный интерфейс IObserver. Его должен реализовывать класс, 
@@ -16,6 +15,7 @@ class IObserver
 public:
 	virtual void Update(T const& data) = 0;
 	virtual ~IObserver() = default;
+	unsigned priority = 0;
 };
 
 /*
@@ -42,7 +42,6 @@ public:
 	void RegisterObserver(ObserverType & observer) override
 	{
 		m_observers.insert(&observer);
-		m_hObservers.push(&observer);
 	}
 
 	void NotifyObservers() override
@@ -52,29 +51,11 @@ public:
 		{
 			observer->Update(data);
 		}
-
-		for (auto & obs : m_hObservers)
-		{
-			obs->Update(data);
-		}
 	}
 		
 	void RemoveObserver(ObserverType & observer) override
 	{
-		//auto that = m_observers.find(&observer);
-		//if (that == this)
-		//{
-		//	std::cout << "Try delete myself" << std::endl;
-		//	return;
-		//}
 		m_observers.erase(&observer);
-
-		for (auto it = m_hObservers.begin(); it != m_hObservers.end();++it)
-		{
-			auto a = decltype(m_hObservers)::s_handle_from_iterator(it);
-			m_hObservers.erase(a);
-		}
-		
 	}
 
 protected:
@@ -83,6 +64,14 @@ protected:
 	virtual T GetChangedData()const = 0;
 
 private:
-	std::set<ObserverType *> m_observers;
-	boost::heap::fibonacci_heap<ObserverType *> m_hObservers;
+
+	struct comparison
+	{
+		bool operator()(const ObserverType* a, const ObserverType* b)
+		{
+			return a->priority < b->priority;
+		}
+	};
+
+	std::set<ObserverType *, comparison> m_observers;
 };

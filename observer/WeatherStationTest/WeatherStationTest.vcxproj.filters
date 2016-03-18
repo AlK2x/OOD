@@ -51,6 +51,12 @@
     <ClInclude Include="..\WeatherStation\WeatherInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DummyObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DummyObservable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -72,6 +78,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\WeatherStation\WeatherData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyObserver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DummyObservable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

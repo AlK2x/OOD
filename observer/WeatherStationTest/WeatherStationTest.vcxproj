@@ -166,6 +166,8 @@
     <ClInclude Include="..\WeatherStation\StatsDisplay.h" />
     <ClInclude Include="..\WeatherStation\WeatherData.h" />
     <ClInclude Include="..\WeatherStation\WeatherInfo.h" />
+    <ClInclude Include="DummyObservable.h" />
+    <ClInclude Include="DummyObserver.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -175,6 +177,8 @@
     <ClCompile Include="..\WeatherStation\Observable.cpp" />
     <ClCompile Include="..\WeatherStation\StatsDisplay.cpp" />
     <ClCompile Include="..\WeatherStation\WeatherData.cpp" />
+    <ClCompile Include="DummyObservable.cpp" />
+    <ClCompile Include="DummyObserver.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

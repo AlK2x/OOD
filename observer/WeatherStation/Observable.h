@@ -27,7 +27,7 @@ private:
 	{
 		bool operator()(const ObserverType* a, const ObserverType* b)
 		{
-			return a->priority < b->priority;
+			return a->priority > b->priority;
 		}
 	};
 

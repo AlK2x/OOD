@@ -24,31 +24,31 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BadWeatherData.h">
+    <ClInclude Include="..\WeatherStation\BadWeatherData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Display.h">
+    <ClInclude Include="..\WeatherStation\Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IObservable.h">
+    <ClInclude Include="..\WeatherStation\IObservable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IObserver.h">
+    <ClInclude Include="..\WeatherStation\IObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SensorType.h">
+    <ClInclude Include="..\WeatherStation\Observable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StatsDisplay.h">
+    <ClInclude Include="..\WeatherStation\SensorType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherData.h">
+    <ClInclude Include="..\WeatherStation\StatsDisplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherInfo.h">
+    <ClInclude Include="..\WeatherStation\WeatherData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Observable.h">
+    <ClInclude Include="..\WeatherStation\WeatherInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,19 +56,22 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="WeatherStationTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BadWeatherData.cpp">
+    <ClCompile Include="..\WeatherStation\BadWeatherData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Display.cpp">
+    <ClCompile Include="..\WeatherStation\Display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StatsDisplay.cpp">
+    <ClCompile Include="..\WeatherStation\Observable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WeatherData.cpp">
+    <ClCompile Include="..\WeatherStation\StatsDisplay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\WeatherStation\WeatherData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

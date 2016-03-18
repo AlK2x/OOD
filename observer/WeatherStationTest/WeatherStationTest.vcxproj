@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{36591363-63BD-4B9C-8AD1-24F0A03AB280}</ProjectGuid>
+    <ProjectGuid>{7108F731-950B-46E8-8AA8-1FC05D2E716A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>WeatherStation</RootNamespace>
+    <RootNamespace>WeatherStationTest</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -71,6 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <ExecutablePath>C:\SDK\boost_1_57_0;$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>C:\SDK\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -79,9 +81,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <ExecutablePath>C:\SDK\boost_1_57_0;$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>C:\SDK\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <ExecutablePath>C:\SDK\boost_1_57_0;$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>C:\SDK\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -89,6 +95,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\SDK\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,11 +109,15 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\SDK\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>$(TargetPath)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -116,6 +127,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\SDK\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +144,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\SDK\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,30 +157,31 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BadWeatherData.h" />
-    <ClInclude Include="Display.h" />
-    <ClInclude Include="IObservable.h" />
-    <ClInclude Include="IObserver.h" />
-    <ClInclude Include="Observable.h" />
-    <ClInclude Include="SensorType.h" />
-    <ClInclude Include="StatsDisplay.h" />
+    <ClInclude Include="..\WeatherStation\BadWeatherData.h" />
+    <ClInclude Include="..\WeatherStation\Display.h" />
+    <ClInclude Include="..\WeatherStation\IObservable.h" />
+    <ClInclude Include="..\WeatherStation\IObserver.h" />
+    <ClInclude Include="..\WeatherStation\Observable.h" />
+    <ClInclude Include="..\WeatherStation\SensorType.h" />
+    <ClInclude Include="..\WeatherStation\StatsDisplay.h" />
+    <ClInclude Include="..\WeatherStation\WeatherData.h" />
+    <ClInclude Include="..\WeatherStation\WeatherInfo.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="WeatherData.h" />
-    <ClInclude Include="WeatherInfo.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BadWeatherData.cpp" />
-    <ClCompile Include="Display.cpp" />
-    <ClCompile Include="StatsDisplay.cpp" />
+    <ClCompile Include="..\WeatherStation\BadWeatherData.cpp" />
+    <ClCompile Include="..\WeatherStation\Display.cpp" />
+    <ClCompile Include="..\WeatherStation\Observable.cpp" />
+    <ClCompile Include="..\WeatherStation\StatsDisplay.cpp" />
+    <ClCompile Include="..\WeatherStation\WeatherData.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="WeatherData.cpp" />
+    <ClCompile Include="WeatherStationTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

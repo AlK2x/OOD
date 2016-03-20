@@ -1,29 +1,37 @@
 #include "stdafx.h"
 #include "StatsDisplay.h"
+#include "WeatherDataType.h"
 
 CStatsDisplay::CStatsDisplay()
 {
-	for (auto & sensorInfo : SENSOR_INFOS)
-	{
-		m_minSensorValue[sensorInfo.type] = std::numeric_limits<double>::infinity();
-		m_maxSensorValue[sensorInfo.type] = -std::numeric_limits<double>::infinity();
-		m_accSensorValue[sensorInfo.type] = 0;
-	}
 }
 
 void CStatsDisplay::Update(SWeatherInfo const & data)
 {
-	for (auto & info : data.sensorData)
+	if (data.type == WeatherDataType::INDOOR)
 	{
-		m_maxSensorValue[info.first] = std::max(m_maxSensorValue[info.first], info.second);
-		m_minSensorValue[info.first] = std::min(m_minSensorValue[info.first], info.second);
-		m_accSensorValue[info.first] += info.second;
-
-		std::cout << "Max " << SensorInfo::getDescription(info.first) << " " << m_maxSensorValue[info.first] << std::endl;
-		std::cout << "Min " << SensorInfo::getDescription(info.first) << " " << m_minSensorValue[info.first] << std::endl;
-		std::cout << "Average " << SensorInfo::getDescription(info.first) << " " << (m_accSensorValue[info.first] / m_countAcc) << std::endl;
+		m_inData.UpdateStats(data);
 	}
-	++m_countAcc;
+	else if (data.type == WeatherDataType::OUTDOOR)
+	{
+		m_outData.UpdateStats(data);
+	}
+
+	if (m_inData.isInitialized())
+	{
+		std::cout << "In: " << std::endl;
+		DisplayData(m_inData);
+	}
+	if (m_outData.isInitialized())
+	{
+		std::cout << "Out: " << std::endl;
+		DisplayData(m_outData);
+	}
 
 	std::cout << "----------------" << std::endl;
+}
+
+void CStatsDisplay::DisplayData(CSensorStats const & stats) const
+{
+	stats.DisplayStats(std::cout);
 }

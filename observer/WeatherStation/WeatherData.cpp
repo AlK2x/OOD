@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "WeatherData.h"
+#include "WeatherDataType.h"
 
 // Температура в градусах Цельсия
 
@@ -18,6 +19,11 @@ double CWeatherData::GetHumidity() const
 double CWeatherData::GetPressure() const
 {
 	return m_pressure;
+}
+
+void CWeatherData::SetWeatherDataType(WeatherDataType type)
+{
+	m_type = type;
 }
 
 void CWeatherData::MeasurementsChanged()
@@ -40,6 +46,7 @@ SWeatherInfo CWeatherData::GetChangedData() const
 	info.sensorData[SensorType::TEMPERATURE] = GetTemperature();
 	info.sensorData[SensorType::HUMIDITY] = GetHumidity();
 	info.sensorData[SensorType::PRESSURE] = GetPressure();
+	info.type = m_type;
 
 	return info;
 }

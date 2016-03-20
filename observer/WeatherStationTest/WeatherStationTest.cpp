@@ -38,22 +38,29 @@ BOOST_AUTO_TEST_CASE(TestSelfDelete)
 
 BOOST_AUTO_TEST_CASE(TestChangeObservsOrder)
 {
+	CDummyObservable dummyData;
+	CDummyObserver dummyObserver1(1);
+	dummyObserver1.priority = 1;
+	CDummyObserver dummyObserver2(2);
+	dummyObserver2.priority = 2;
+
+	dummyData.RegisterObserver(dummyObserver1);
+	dummyData.RegisterObserver(dummyObserver2);
+
 	boost::test_tools::output_test_stream output;
 	{
 		CoutRedirect guard(output.rdbuf());
-		CDummyObservable dummyData;
-		CDummyObserver dummyObserver1(1);
-		dummyObserver1.priority = 1;
-		CDummyObserver dummyObserver2(2);
-		dummyObserver2.priority = 2;
-
-		dummyData.RegisterObserver(dummyObserver1);
-		dummyData.RegisterObserver(dummyObserver2);
-
 		dummyData.NotifyObservers();
 	}
 
-	BOOST_CHECK(output.is_equal("1\n2\n"));
+	BOOST_CHECK(output.is_equal("2\n1\n"));
+}
+
+BOOST_AUTO_TEST_CASE(TestIndoorOutdoorSensor)
+{
+	CWeatherData indoor;
+	indoor.SetWeatherDataType(WeatherDataType::INDOOR);
+	CWeatherData outdoor;
 }
 
 BOOST_AUTO_TEST_SUITE_END()

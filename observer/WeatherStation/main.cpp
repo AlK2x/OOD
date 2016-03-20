@@ -7,24 +7,28 @@
 
 int main()
 {
-	CWeatherData wd;
+	CWeatherData outdoor;
+	CWeatherData indoor;
+	indoor.SetWeatherDataType(WeatherDataType::INDOOR);
 
 	CDisplay display;
-	wd.RegisterObserver(display);
+	outdoor.RegisterObserver(display);
+	indoor.RegisterObserver(display);
 
 	CStatsDisplay statsDisplay;
 	display.priority = 10;
-	wd.RegisterObserver(statsDisplay);
+	outdoor.RegisterObserver(statsDisplay);
 
-	wd.SetMeasurements(3, 0.7, 760);
-	wd.SetMeasurements(4, 0.8, 761);
+	indoor.SetMeasurements(42, 42, 42);
+	outdoor.SetMeasurements(3, 0.7, 760);
+	outdoor.SetMeasurements(4, 0.8, 761);
 
-	wd.RemoveObserver(statsDisplay);
+	outdoor.RemoveObserver(statsDisplay);
 
-	CBadWeatherData bwd(wd);
-	wd.RegisterObserver(bwd);
-	wd.SetMeasurements(1, 2, 3);
-	wd.SetMeasurements(4, 5, 6);
+	CBadWeatherData bwd(outdoor);
+	outdoor.RegisterObserver(bwd);
+	outdoor.SetMeasurements(1, 2, 3);
+	outdoor.SetMeasurements(4, 5, 6);
 
 	return 0;
 }

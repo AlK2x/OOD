@@ -4,17 +4,16 @@
 #include "WeatherData.h"
 #include "WeatherInfo.h"
 #include "IObserver.h"
+#include "SensorStats.h"
 
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
 public:
 	CStatsDisplay();
 	void Update(SWeatherInfo const& data) override;
-
 private:
-	std::map<SensorType, double> m_minSensorValue;
-	std::map<SensorType, double> m_maxSensorValue;
-	std::map<SensorType, double> m_accSensorValue;
+	void DisplayData(CSensorStats const & stats) const;
 
-	unsigned m_countAcc = 0;
+	CSensorStats m_inData;
+	CSensorStats m_outData;
 };

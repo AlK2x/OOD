@@ -7,11 +7,8 @@ using namespace std;
 
 struct IFlyBehavior
 {
-	IFlyBehavior() :m_sortieCount(0) {}
 	virtual ~IFlyBehavior() {};
 	virtual void Fly() = 0;
-protected:
-	unsigned m_sortieCount;
 };
 
 class FlyWithWings : public IFlyBehavior
@@ -22,6 +19,8 @@ public:
 		++m_sortieCount;
 		cout << "I'm flying with wings!! Sortie # " << m_sortieCount << endl;
 	}
+private:
+	unsigned m_sortieCount = 0;
 };
 
 class FlyNoWay : public IFlyBehavior
@@ -112,7 +111,7 @@ public:
 	{
 		m_flyBehavior->Fly();
 	}
-	virtual void Dance()
+	void Dance()
 	{
 		m_danceBehavior->Dance();
 	}
@@ -218,6 +217,7 @@ void main()
 	MallardDuck mallarDuck;
 	PlayWithDuck(mallarDuck);
 	RedheadDuck redheadDuck;
+	PlayWithDuck(redheadDuck);
 	PlayWithDuck(redheadDuck);
 	RubberDuck rubberDuck;
 	PlayWithDuck(rubberDuck);

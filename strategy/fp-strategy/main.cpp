@@ -179,11 +179,6 @@ int main()
 	PlayWithDuck(redheadDuck);
 	RubberDuck rubberDuck;
 	PlayWithDuck(rubberDuck);
-	DeckoyDuck deckoyDuck;
-	PlayWithDuck(deckoyDuck);
-	ModelDuck modelDuck;
-	PlayWithDuck(modelDuck);
-	PlayWithDuck(modelDuck);
 
 	return 0;
 }

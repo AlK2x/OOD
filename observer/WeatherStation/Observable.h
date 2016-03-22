@@ -9,8 +9,9 @@ class CObservable : public IObservable<T>
 {
 public:
 	typedef IObserver<T> ObserverType;
+	typedef std::pair<unsigned, ObserverType*> ComparableType;
 
-	void RegisterObserver(ObserverType & observer) override;
+	void RegisterObserver(ObserverType & observer, unsigned priority = 0) override;
 
 	void NotifyObservers() override;
 
@@ -23,21 +24,21 @@ protected:
 
 private:
 
-	struct comparison
+	struct SComparator
 	{
-		bool operator()(const ObserverType* a, const ObserverType* b)
+		bool operator() (ComparableType const & left, ComparableType const & right)
 		{
-			return a->priority > b->priority;
+			return left.first < right.first;
 		}
 	};
 
-	std::set<ObserverType *, comparison> m_observers;
+	std::set<ComparableType, SComparator> m_observers;
 };
 
 template<class T>
-void CObservable<T>::RegisterObserver(ObserverType & observer)
+void CObservable<T>::RegisterObserver(ObserverType & observer, unsigned priority = 0)
 {
-	m_observers.insert(&observer);
+	m_observers.insert(std::make_pair(priority, &observer));
 }
 
 template<class T>
@@ -47,12 +48,12 @@ void CObservable<T>::NotifyObservers()
 	auto observers = m_observers;
 	for (auto & observer : observers)
 	{
-		observer->Update(data);
+		observer.second->Update(data);
 	}
 }
 
 template<class T>
 void CObservable<T>::RemoveObserver(ObserverType & observer)
 {
-	m_observers.erase(&observer);
+	//m_observers.erase(&observer);
 }

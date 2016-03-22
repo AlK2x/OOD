@@ -12,5 +12,4 @@ class IObserver
 public:
 	virtual void Update(T const& data) = 0;
 	virtual ~IObserver() = default;
-	unsigned priority = 0;
 };

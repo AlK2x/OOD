@@ -149,6 +149,7 @@
     <ClInclude Include="IObservable.h" />
     <ClInclude Include="IObserver.h" />
     <ClInclude Include="Observable.h" />
+    <ClInclude Include="PriorityObserver.h" />
     <ClInclude Include="SensorStats.h" />
     <ClInclude Include="SensorType.h" />
     <ClInclude Include="StatsDisplay.h" />

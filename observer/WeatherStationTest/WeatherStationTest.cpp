@@ -4,6 +4,7 @@
 #include "../WeatherStation/WeatherData.h"
 #include "../WeatherStation/Display.h"
 #include "../WeatherStation/StatsDisplay.h"
+#include "../WeatherStation/PriorityObserver.h"
 #include "DummyObserver.h"
 #include "DummyObservable.h"
 
@@ -40,9 +41,8 @@ BOOST_AUTO_TEST_CASE(TestChangeObservsOrder)
 {
 	CDummyObservable dummyData;
 	CDummyObserver dummyObserver1(1);
-	dummyObserver1.priority = 1;
+
 	CDummyObserver dummyObserver2(2);
-	dummyObserver2.priority = 2;
 
 	dummyData.RegisterObserver(dummyObserver1);
 	dummyData.RegisterObserver(dummyObserver2);

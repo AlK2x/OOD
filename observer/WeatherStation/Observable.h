@@ -28,11 +28,11 @@ private:
 	{
 		bool operator() (ComparableType const & left, ComparableType const & right)
 		{
-			return left.first < right.first;
+			return left.first > right.first;
 		}
 	};
 
-	std::set<ComparableType, SComparator> m_observers;
+	std::multiset<ComparableType, SComparator> m_observers;
 };
 
 template<class T>

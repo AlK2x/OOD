@@ -9,7 +9,7 @@ int main()
 	CWeatherData outdoor;
 
 	CDisplay display;
-	outdoor.RegisterObserver(display, 10);
+	outdoor.RegisterObserver(display);
 
 	CStatsDisplay statsDisplay;
 	outdoor.RegisterObserver(statsDisplay);

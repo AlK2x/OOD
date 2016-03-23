@@ -10,12 +10,15 @@ int main()
 
 	CDisplay display;
 	outdoor.RegisterObserver(display);
-
+	
 	CStatsDisplay statsDisplay;
 	outdoor.RegisterObserver(statsDisplay);
 
 	outdoor.SetMeasurements(3, 0.7, 760);
+	outdoor.RemoveObserver(display);
 	outdoor.SetMeasurements(4, 0.8, 761);
+	
+	outdoor.SetMeasurements(42, 42, 42);
 
 	return 0;
 }

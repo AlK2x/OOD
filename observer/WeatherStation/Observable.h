@@ -55,5 +55,12 @@ void CObservable<T>::NotifyObservers()
 template<class T>
 void CObservable<T>::RemoveObserver(ObserverType & observer)
 {
+	auto obs = std::find_if(m_observers.begin(), m_observers.end(), [&](ComparableType const & t){
+		return t.second == &observer;
+	});
+	if (obs != m_observers.end())
+	{
+		m_observers.erase(obs);
+	}
 	//m_observers.erase(&observer);
 }

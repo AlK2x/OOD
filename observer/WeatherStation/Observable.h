@@ -2,6 +2,15 @@
 #include "stdafx.h"
 #include "IObservable.h"
 #include "IObserver.h"
+#include "WeatherInfo.h"
+#include "boost\multi_index\ordered_index.hpp"
+#include "boost\multi_index\hashed_index.hpp"
+#include "boost\multi_index\member.hpp"
+#include "boost\multi_index\identity.hpp"
+#include "boost\multi_index_container.hpp"
+
+using namespace boost;
+using namespace boost::multi_index;
 
 // Реализация интерфейса IObservable
 template <class T>
@@ -9,7 +18,20 @@ class CObservable : public IObservable<T>
 {
 public:
 	typedef IObserver<T> ObserverType;
-	typedef std::pair<unsigned, ObserverType*> ComparableType;
+	
+	struct ComparableTypeEx
+	{
+		ObserverType* obs;
+		unsigned priority;
+	};
+
+	typedef multi_index_container <
+		ComparableTypeEx,
+		indexed_by<
+			hashed_unique<member<ComparableTypeEx, ObserverType*, &ComparableTypeEx::obs>>,
+			ordered_non_unique<member<ComparableTypeEx, unsigned, &ComparableTypeEx::priority>>
+		>
+	> MultiIndexType;
 
 	void RegisterObserver(ObserverType & observer, unsigned priority = 0) override;
 
@@ -23,44 +45,34 @@ protected:
 	virtual T GetChangedData()const = 0;
 
 private:
-
-	struct SComparator
-	{
-		bool operator() (ComparableType const & left, ComparableType const & right)
-		{
-			return left.first > right.first;
-		}
-	};
-
-	std::multiset<ComparableType, SComparator> m_observers;
+	MultiIndexType m_multiObservers;
 };
 
 template<class T>
 void CObservable<T>::RegisterObserver(ObserverType & observer, unsigned priority = 0)
 {
-	m_observers.insert(std::make_pair(priority, &observer));
+	m_multiObservers.insert({&observer, priority});
+	//auto it = m_priorityObservers.insert(std::pair<unsigned, ObserverType*>(priority, &observer));
+	//m_obsPointers.insert(std::pair<ObserverType, WeatherInfoIter>(&observer, it))
+	//m_observers.insert(std::make_pair(priority, &observer));
 }
 
 template<class T>
 void CObservable<T>::NotifyObservers()
 {
 	T data = GetChangedData();
-	auto observers = m_observers;
-	for (auto & observer : observers)
+	auto observers = m_multiObservers;
+	auto &iter = observers.get<0>();
+	for (auto it = iter.begin(); it != iter.end(); ++it)
 	{
-		observer.second->Update(data);
+		it->obs->Update(data);
 	}
 }
 
 template<class T>
 void CObservable<T>::RemoveObserver(ObserverType & observer)
 {
-	auto obs = std::find_if(m_observers.begin(), m_observers.end(), [&](ComparableType const & t){
-		return t.second == &observer;
-	});
-	if (obs != m_observers.end())
-	{
-		m_observers.erase(obs);
-	}
-	//m_observers.erase(&observer);
+	auto &it = m_multiObservers.get<0>();
+	auto iter = it.find(&observer);
+	it.erase(iter);
 }

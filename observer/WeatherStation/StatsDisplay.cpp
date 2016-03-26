@@ -3,12 +3,21 @@
 #include "WeatherDataType.h"
 #include "WeatherInfo.h"
 
-void CStatsDisplay::Update(SWeatherInfo const & data)
+void CStatsDisplay::Update(IObservable<SWeatherInfo> const& subject)
 {
-	m_temp.Update(data.temperature);
-	m_pressure.Update(data.pressure);
-	m_humidity.Update(data.humidity);
+	const CWeatherData * subj = static_cast<const CWeatherData*>(&subject);
+	m_temp.Update(subj->GetTemperature());
+	m_pressure.Update(subj->GetPressure());
+	m_humidity.Update(subj->GetHumidity());
 
+	switch (subj->GetLocation())
+	{
+	case Location::Indoor :
+		std::cout << "INDOOR" << std::endl;
+		break;
+	default:
+		std::cout << "OUTDOOR" << std::endl;
+	}
 	std::cout << "\\\\\\\\\\\\\\\\\\  Print statsistic //////////////////" << std::endl;
 	std::cout << "Temperature: " << std::endl;
 	DisplayData(m_temp);

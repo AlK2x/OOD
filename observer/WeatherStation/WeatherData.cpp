@@ -21,9 +21,9 @@ double CWeatherData::GetPressure() const
 	return m_pressure;
 }
 
-void CWeatherData::SetWeatherDataType(WeatherDataType type)
+Location CWeatherData::GetLocation() const
 {
-	m_type = type;
+	return m_loc;
 }
 
 void CWeatherData::MeasurementsChanged()

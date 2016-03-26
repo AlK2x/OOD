@@ -56,11 +56,4 @@ BOOST_AUTO_TEST_CASE(TestChangeObservsOrder)
 	BOOST_CHECK(output.is_equal("2\n1\n"));
 }
 
-BOOST_AUTO_TEST_CASE(TestIndoorOutdoorSensor)
-{
-	CWeatherData indoor;
-	indoor.SetWeatherDataType(WeatherDataType::INDOOR);
-	CWeatherData outdoor;
-}
-
 BOOST_AUTO_TEST_SUITE_END()

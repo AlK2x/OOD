@@ -10,3 +10,8 @@ struct SWeatherInfo
 	double humidity;
 };
 
+enum class Location
+{
+	Indoor,
+	Outdoor
+};

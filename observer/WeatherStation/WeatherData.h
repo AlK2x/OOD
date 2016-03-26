@@ -8,6 +8,9 @@
 class CWeatherData : public CObservable<SWeatherInfo>
 {
 public:
+	CWeatherData(Location location)
+		:m_loc(location) {}
+
 	// Температура в градусах Цельсия
 	double GetTemperature()const;
 	// Относительная влажность (0...100)
@@ -15,7 +18,7 @@ public:
 	// Атмосферное давление (в мм.рт.ст)
 	double GetPressure()const;
 
-	void SetWeatherDataType(WeatherDataType type);
+	Location GetLocation() const;
 
 	void MeasurementsChanged();
 
@@ -27,6 +30,6 @@ private:
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
 
-	WeatherDataType m_type = WeatherDataType::OUTDOOR;
+	Location m_loc;
 };
 

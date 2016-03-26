@@ -8,7 +8,7 @@
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
 public:
-	void Update(SWeatherInfo const& data) override;
+	void Update(IObservable<SWeatherInfo> const& subject) override;
 private:
 	void DisplayData(CSensorStatistic const & stats) const;
 

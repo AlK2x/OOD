@@ -3,27 +3,9 @@
 
 void CDisplay::Update(SWeatherInfo const & data)
 {
-	if (data.type == WeatherDataType::INDOOR)
-	{
-		m_inData = data;
-	}
-	else if (data.type == WeatherDataType::OUTDOOR)
-	{
-		m_outData = data;
-	}
-
-	std::cout << "In: " << std::endl;
-	DisplayData(m_inData);
-	std::cout << "Out: " << std::endl;
-	DisplayData(m_outData);
+	std::cout << "Tempearure: " << data.temperature << std::endl;
+	std::cout << "Pressure  : " << data.pressure << std::endl;
+	std::cout << "Humidity  : " << data.humidity << std::endl;
 
 	std::cout << "----------------" << std::endl;
-}
-
-void CDisplay::DisplayData(SWeatherInfo const & data) const
-{
-	for (auto & info : data.sensorData)
-	{
-		std::cout << "Current " << SensorInfo::getDescription(info.first) << " " << info.second << std::endl;
-	}
 }

@@ -5,7 +5,8 @@
 
 struct SWeatherInfo
 {
-	std::map<SensorType, double> sensorData;
-	WeatherDataType type;
+	double temperature;
+	double pressure;
+	double humidity;
 };
 

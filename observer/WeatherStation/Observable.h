@@ -18,6 +18,7 @@ class CObservable : public IObservable<T>
 {
 public:
 	typedef IObserver<T> ObserverType;
+
 	
 	struct ComparableTypeEx
 	{
@@ -52,9 +53,6 @@ template<class T>
 void CObservable<T>::RegisterObserver(ObserverType & observer, unsigned priority = 0)
 {
 	m_multiObservers.insert({&observer, priority});
-	//auto it = m_priorityObservers.insert(std::pair<unsigned, ObserverType*>(priority, &observer));
-	//m_obsPointers.insert(std::pair<ObserverType, WeatherInfoIter>(&observer, it))
-	//m_observers.insert(std::make_pair(priority, &observer));
 }
 
 template<class T>
@@ -62,7 +60,7 @@ void CObservable<T>::NotifyObservers()
 {
 	T data = GetChangedData();
 	auto observers = m_multiObservers;
-	auto &iter = observers.get<0>();
+	auto &iter = observers.get<1>();
 	for (auto it = iter.begin(); it != iter.end(); ++it)
 	{
 		it->obs->Update(data);

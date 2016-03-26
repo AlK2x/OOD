@@ -54,10 +54,7 @@
     <ClInclude Include="WeatherDataType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SensorStats.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PriorityObserver.h">
+    <ClInclude Include="SensorStatistic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -80,7 +77,7 @@
     <ClCompile Include="WeatherData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SensorStats.cpp">
+    <ClCompile Include="SensorStatistic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

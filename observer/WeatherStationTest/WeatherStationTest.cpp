@@ -4,7 +4,7 @@
 #include "../WeatherStation/WeatherData.h"
 #include "../WeatherStation/Display.h"
 #include "../WeatherStation/StatsDisplay.h"
-#include "../WeatherStation/PriorityObserver.h"
+#include "../WeatherStation/SensorStatistic.h"
 #include "DummyObserver.h"
 #include "DummyObservable.h"
 
@@ -44,8 +44,8 @@ BOOST_AUTO_TEST_CASE(TestChangeObservsOrder)
 
 	CDummyObserver dummyObserver2(2);
 
-	dummyData.RegisterObserver(dummyObserver1);
-	dummyData.RegisterObserver(dummyObserver2);
+	dummyData.RegisterObserver(dummyObserver1, 200);
+	dummyData.RegisterObserver(dummyObserver2, 20);
 
 	boost::test_tools::output_test_stream output;
 	{

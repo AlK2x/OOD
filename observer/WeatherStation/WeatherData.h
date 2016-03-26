@@ -3,6 +3,7 @@
 #include "Observable.h"
 #include "SensorType.h"
 #include "WeatherInfo.h"
+#include "SensorStatistic.h"
 
 class CWeatherData : public CObservable<SWeatherInfo>
 {

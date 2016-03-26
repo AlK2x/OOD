@@ -43,10 +43,9 @@ void CWeatherData::SetMeasurements(double temp, double humidity, double pressure
 SWeatherInfo CWeatherData::GetChangedData() const
 {
 	SWeatherInfo info;
-	info.sensorData[SensorType::TEMPERATURE] = GetTemperature();
-	info.sensorData[SensorType::HUMIDITY] = GetHumidity();
-	info.sensorData[SensorType::PRESSURE] = GetPressure();
-	info.type = m_type;
+	info.temperature = GetTemperature();
+	info.humidity = GetHumidity();
+	info.pressure = GetPressure();
 
 	return info;
 }

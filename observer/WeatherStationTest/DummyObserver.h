@@ -1,6 +1,5 @@
 #pragma once
 #include "../WeatherStation/IObserver.h"
-#include "../WeatherStation/PriorityObserver.h"
 
 class CDummyObserver : public IObserver<int>
 {

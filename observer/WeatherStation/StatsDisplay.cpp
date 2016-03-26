@@ -1,37 +1,28 @@
 #include "stdafx.h"
 #include "StatsDisplay.h"
 #include "WeatherDataType.h"
-
-CStatsDisplay::CStatsDisplay()
-{
-}
+#include "WeatherInfo.h"
 
 void CStatsDisplay::Update(SWeatherInfo const & data)
 {
-	if (data.type == WeatherDataType::INDOOR)
-	{
-		m_inData.UpdateStats(data);
-	}
-	else if (data.type == WeatherDataType::OUTDOOR)
-	{
-		m_outData.UpdateStats(data);
-	}
+	m_temp.Update(data.temperature);
+	m_pressure.Update(data.pressure);
+	m_humidity.Update(data.humidity);
 
-	if (m_inData.isInitialized())
-	{
-		std::cout << "In: " << std::endl;
-		DisplayData(m_inData);
-	}
-	if (m_outData.isInitialized())
-	{
-		std::cout << "Out: " << std::endl;
-		DisplayData(m_outData);
-	}
+	std::cout << "\\\\\\\\\\\\\\\\\\  Print statsistic //////////////////" << std::endl;
+	std::cout << "Temperature: " << std::endl;
+	DisplayData(m_temp);
+	std::cout << "Pressure   : " << std::endl;
+	DisplayData(m_pressure);
+	std::cout << "Humidity   : " << std::endl;
+	DisplayData(m_humidity);
 
 	std::cout << "----------------" << std::endl;
 }
 
-void CStatsDisplay::DisplayData(CSensorStats const & stats) const
+void CStatsDisplay::DisplayData(CSensorStatistic const & stats) const
 {
-	stats.DisplayStats(std::cout);
+	std::cout << "    Maximum: " << stats.getMax() << std::endl;
+	std::cout << "    Minimum: " << stats.getMin() << std::endl;
+	std::cout << "    Average: " << stats.GetAverage() << std::endl;
 }

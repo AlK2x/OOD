@@ -5,7 +5,12 @@
 
 void CStatsDisplay::Update(IObservable<SWeatherInfo> const& subject)
 {
-	const CWeatherData * subj = static_cast<const CWeatherData*>(&subject);
+	const CWeatherData * subj = dynamic_cast<const CWeatherData*>(&subject);
+	if (subj == NULL)
+	{
+		return;
+	}
+
 	m_temp.Update(subj->GetTemperature());
 	m_pressure.Update(subj->GetPressure());
 	m_humidity.Update(subj->GetHumidity());

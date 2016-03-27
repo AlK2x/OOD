@@ -21,6 +21,7 @@ int main()
 	out.SetMeasurements(42, 42, 42);
 	in.RegisterObserver(statsDisplay);
 	in.SetMeasurements(1, 2, 3);
+	out.SetMeasurements(123, 123, 123);
 
 	return 0;
 }

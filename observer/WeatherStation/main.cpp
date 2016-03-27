@@ -1,22 +1,24 @@
+#include "stdafx.h"
 #include "WeatherData.h"
+#include "Display.h"
+#include "StatsDisplay.h"
+#include "BadWeatherData.h"
 
 int main()
 {
-	CWeatherData wd;
+	CWeatherData outdoor;
 
 	CDisplay display;
-	wd.RegisterObserver(display);
+	outdoor.RegisterObserver(display);
 	
 	CStatsDisplay statsDisplay;
-	display.priority = 10;
-	wd.RegisterObserver(statsDisplay);
+	outdoor.RegisterObserver(statsDisplay);
+
+	outdoor.SetMeasurements(3, 0.7, 760);
+	outdoor.RemoveObserver(display);
+	outdoor.SetMeasurements(4, 0.8, 761);
 	
-	wd.SetMeasurements(3, 0.7, 760);
-	wd.SetMeasurements(4, 0.8, 761);
+	outdoor.SetMeasurements(42, 42, 42);
 
-	wd.RemoveObserver(statsDisplay);
-
-	//wd.SetMeasurements(10, 0.8, 761);
-	//wd.SetMeasurements(-10, 0.8, 761);
 	return 0;
 }

@@ -6,6 +6,10 @@
 
 using namespace std;
 
+typedef function<void()> FlyBehavior;
+typedef function<void()> QuackBehavior;
+typedef function<void()> DanceBehavior;
+
 class FlyWithWings
 {
 public:
@@ -20,12 +24,12 @@ private:
 
 void NoFly() {}
 
-void QuackBehavior()
+void QuackFunc()
 {
 	cout << "Quack Quack!!!" << endl;
 }
 
-void SqueakBehavior()
+void Squeak()
 {
 	cout << "Squeek!!!" << endl;
 }
@@ -47,13 +51,14 @@ void Minuet()
 class Duck
 {
 public:
-	Duck(function<void()> flyBehavior, function<void()> const &quackBehavior, function<void()> const &danceBehavior)
-		:
-		m_flyBehavior(flyBehavior),
-		m_quackBehavior(quackBehavior),
+	
+	Duck(FlyBehavior const & flyBehavior, QuackBehavior const & quackBehavior, DanceBehavior const & danceBehavior)
+		: m_quackBehavior(quackBehavior),
 		m_danceBehavior(danceBehavior)
 	{
-		SetFlyBehavior(NoFly);
+		assert(quackBehavior);
+		assert(danceBehavior);
+		SetFlyBehavior(flyBehavior);
 	}
 	void Quack() const
 	{
@@ -67,29 +72,30 @@ public:
 	{
 		m_flyBehavior();
 	}
-	virtual void Dance()
+	void Dance()
 	{
 		m_danceBehavior();
 	}
 
-	void SetFlyBehavior(function<void()> flyBehavior)
+	void SetFlyBehavior(FlyBehavior const & flyBehavior)
 	{
+		assert(flyBehavior);
 		m_flyBehavior = flyBehavior;
 	}
 
 	virtual void Display() const = 0;
 	virtual ~Duck() {};
 private:
-	function<void()> m_flyBehavior;
-	function<void()> m_quackBehavior;
-	function<void()> m_danceBehavior;
+	FlyBehavior m_flyBehavior;
+	QuackBehavior m_quackBehavior;
+	DanceBehavior m_danceBehavior;
 };
 
 class MallardDuck : public Duck
 {
 public:
 	MallardDuck()
-		: Duck(FlyWithWings(), QuackBehavior, Minuet)
+		: Duck(FlyWithWings(), QuackFunc, Minuet)
 	{}
 
 	void Display() const override
@@ -103,7 +109,7 @@ class RedheadDuck : public Duck
 {
 public:
 	RedheadDuck()
-		: Duck(FlyWithWings(), QuackBehavior, Minuet)
+		: Duck(FlyWithWings(), QuackFunc, Waltz)
 	{
 	}
 	void Display() const override
@@ -129,7 +135,7 @@ class RubberDuck : public Duck
 {
 public:
 	RubberDuck()
-		: Duck(FlyWithWings(), QuackBehavior, NoDance)
+		: Duck(NoFly, QuackFunc, NoDance)
 	{
 	}
 	void Display() const override
@@ -142,9 +148,9 @@ class ModelDuck : public Duck
 {
 public:
 	ModelDuck()
-		: Duck(FlyWithWings(), QuackBehavior, NoDance)
+		: Duck(NoFly, QuackFunc, NoDance)
 	{
-	}	
+	}
 	void Display() const override
 	{
 		cout << "I'm model duck" << endl;
@@ -170,13 +176,9 @@ int main()
 	PlayWithDuck(mallarDuck);
 	RedheadDuck redheadDuck;
 	PlayWithDuck(redheadDuck);
+	PlayWithDuck(redheadDuck);
 	RubberDuck rubberDuck;
 	PlayWithDuck(rubberDuck);
-	DeckoyDuck deckoyDuck;
-	PlayWithDuck(deckoyDuck);
-	ModelDuck modelDuck;
-	PlayWithDuck(modelDuck);
-	PlayWithDuck(modelDuck);
 
 	return 0;
 }

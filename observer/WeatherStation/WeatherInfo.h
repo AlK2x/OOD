@@ -15,3 +15,12 @@ enum class Location
 	Indoor,
 	Outdoor
 };
+
+enum class WindDirection
+{
+	Calm,
+	North,
+	East,
+	South,
+	West
+};

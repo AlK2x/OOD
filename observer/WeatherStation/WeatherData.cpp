@@ -2,23 +2,29 @@
 #include "WeatherData.h"
 #include "WeatherDataType.h"
 
-// Температура в градусах Цельсия
-
 double CWeatherData::GetTemperature() const
 {
 	return m_temperature;
 }
 
-// Относительная влажность (0...100)
 double CWeatherData::GetHumidity() const
 {
 	return m_humidity;
 }
 
-// Атмосферное давление (в мм.рт.ст)
 double CWeatherData::GetPressure() const
 {
 	return m_pressure;
+}
+
+double CWeatherData::GetWindSpeed() const
+{
+	return m_windSpeed;
+}
+
+WindDirection CWeatherData::GetWindDirection() const
+{
+	return m_windDirection;
 }
 
 Location CWeatherData::GetLocation() const

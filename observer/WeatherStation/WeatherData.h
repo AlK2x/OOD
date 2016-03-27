@@ -18,6 +18,10 @@ public:
 	// Атмосферное давление (в мм.рт.ст)
 	double GetPressure()const;
 
+	double GetWindSpeed()const;
+
+	WindDirection GetWindDirection()const;
+
 	Location GetLocation() const;
 
 	void MeasurementsChanged();
@@ -29,6 +33,8 @@ private:
 	double m_temperature = 0.0;
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
+	double m_windSpeed = 0.0;
+	WindDirection m_windDirection = WindDirection::Calm;
 
 	Location m_loc;
 };

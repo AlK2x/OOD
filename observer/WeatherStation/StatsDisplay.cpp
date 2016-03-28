@@ -14,6 +14,8 @@ void CStatsDisplay::Update(IObservable<SWeatherInfo> const& subject)
 	m_temp.Update(subj->GetTemperature());
 	m_pressure.Update(subj->GetPressure());
 	m_humidity.Update(subj->GetHumidity());
+	m_windSpeed.Update(subj->GetWindSpeed());
+	m_windDirection.Update(subj->GetWindSpeed(), subj->GetWindDirection());
 
 	switch (subj->GetLocation())
 	{
@@ -24,12 +26,17 @@ void CStatsDisplay::Update(IObservable<SWeatherInfo> const& subject)
 		std::cout << "OUTDOOR" << std::endl;
 	}
 	std::cout << "\\\\\\\\\\\\\\\\\\  Print statsistic //////////////////" << std::endl;
-	std::cout << "Temperature: " << std::endl;
+	std::cout << "Temperature   : " << std::endl;
 	DisplayData(m_temp);
-	std::cout << "Pressure   : " << std::endl;
+	std::cout << "Pressure      : " << std::endl;
 	DisplayData(m_pressure);
-	std::cout << "Humidity   : " << std::endl;
+	std::cout << "Humidity      : " << std::endl;
 	DisplayData(m_humidity);
+	std::cout << "Wind Speed    : " << std::endl;
+	DisplayData(m_windSpeed);
+	std::cout << "Wind Direction: " << std::endl;
+	DisplayData(m_windDirection);
+
 
 	std::cout << "----------------" << std::endl;
 }

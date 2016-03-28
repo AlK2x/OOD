@@ -26,7 +26,7 @@ public:
 
 	void MeasurementsChanged();
 
-	void SetMeasurements(double temp, double humidity, double pressure);
+	void SetMeasurements(double temp, double humidity, double pressure, double windSpeed, double windDirection);
 protected:
 	SWeatherInfo GetChangedData()const override;
 private:

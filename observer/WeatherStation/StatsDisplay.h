@@ -4,6 +4,7 @@
 #include "WeatherData.h"
 #include "WeatherInfo.h"
 #include "IObserver.h"
+#include "WindSensorStatistic.h"
 
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
@@ -15,4 +16,6 @@ private:
 	CSensorStatistic m_temp;
 	CSensorStatistic m_pressure;
 	CSensorStatistic m_humidity;
+	CSensorStatistic m_windSpeed;
+	CWindSensorStatistic m_windDirection;
 };

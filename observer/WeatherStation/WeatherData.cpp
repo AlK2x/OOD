@@ -37,11 +37,13 @@ void CWeatherData::MeasurementsChanged()
 	NotifyObservers();
 }
 
-void CWeatherData::SetMeasurements(double temp, double humidity, double pressure)
+void CWeatherData::SetMeasurements(double temp, double humidity, double pressure, double windSpeed, double windDirection)
 {
 	m_humidity = humidity;
 	m_temperature = temp;
 	m_pressure = pressure;
+	m_windSpeed = windSpeed;
+	m_windDirection = windDirection;
 
 	MeasurementsChanged();
 }

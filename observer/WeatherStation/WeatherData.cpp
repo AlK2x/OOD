@@ -22,7 +22,7 @@ double CWeatherData::GetWindSpeed() const
 	return m_windSpeed;
 }
 
-WindDirection CWeatherData::GetWindDirection() const
+double CWeatherData::GetWindDirection() const
 {
 	return m_windDirection;
 }

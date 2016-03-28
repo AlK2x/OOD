@@ -10,7 +10,10 @@ public:
 
 	void Update(double value);
 
-	~CSensorStatistic() = default;
+	virtual ~CSensorStatistic() = default;
+protected:
+	virtual void updateImpl(double value);
+
 private:
 	double m_max = -std::numeric_limits<double>::infinity();
 	double m_min = std::numeric_limits<double>::infinity();

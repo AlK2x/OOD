@@ -157,6 +157,7 @@
     <ClInclude Include="WeatherData.h" />
     <ClInclude Include="WeatherDataType.h" />
     <ClInclude Include="WeatherInfo.h" />
+    <ClInclude Include="WindSensorStatistic.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BadWeatherData.cpp" />
@@ -171,6 +172,7 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="WeatherData.cpp" />
+    <ClCompile Include="WindSensorStatistic.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

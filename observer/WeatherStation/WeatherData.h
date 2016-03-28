@@ -20,7 +20,7 @@ public:
 
 	double GetWindSpeed()const;
 
-	WindDirection GetWindDirection()const;
+	double GetWindDirection()const;
 
 	Location GetLocation() const;
 
@@ -34,7 +34,7 @@ private:
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
 	double m_windSpeed = 0.0;
-	WindDirection m_windDirection = WindDirection::Calm;
+	double m_windDirection = 0.0;
 
 	Location m_loc;
 };

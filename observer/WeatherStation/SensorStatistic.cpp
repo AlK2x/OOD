@@ -18,6 +18,11 @@ double CSensorStatistic::getMax() const
 
 void CSensorStatistic::Update(double value)
 {
+	updateImpl(value);
+}
+
+void CSensorStatistic::updateImpl(double value)
+{
 	++m_count;
 	m_max = std::max(m_max, value);
 	m_min = std::min(m_min, value);

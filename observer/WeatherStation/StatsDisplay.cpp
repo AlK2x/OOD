@@ -43,7 +43,7 @@ void CStatsDisplay::Update(IObservable<SWeatherInfo> const& subject)
 
 void CStatsDisplay::DisplayData(CSensorStatistic const & stats) const
 {
-	std::cout << "    Maximum: " << stats.getMax() << std::endl;
-	std::cout << "    Minimum: " << stats.getMin() << std::endl;
+	std::cout << "    Maximum: " << stats.GetMax() << std::endl;
+	std::cout << "    Minimum: " << stats.GetMin() << std::endl;
 	std::cout << "    Average: " << stats.GetAverage() << std::endl;
 }

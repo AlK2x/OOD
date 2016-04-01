@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "stdafx.h"
 #include "Observable.h"
 #include "SensorType.h"
 #include "WeatherInfo.h"

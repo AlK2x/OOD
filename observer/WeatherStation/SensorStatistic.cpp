@@ -6,12 +6,12 @@ double CSensorStatistic::GetAverage() const
 	return m_average;
 }
 
-double CSensorStatistic::getMin() const
+double CSensorStatistic::GetMin() const
 {
 	return m_min;
 }
 
-double CSensorStatistic::getMax() const
+double CSensorStatistic::GetMax() const
 {
 	return m_max;
 }

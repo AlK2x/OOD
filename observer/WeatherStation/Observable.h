@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include "IObservable.h"
 #include "IObserver.h"
 #include "WeatherInfo.h"

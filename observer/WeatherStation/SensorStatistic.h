@@ -1,12 +1,11 @@
 #pragma once
-#include "stdafx.h"
 
 class CSensorStatistic
 {
 public:
 	double GetAverage() const;
-	double getMin() const;
-	double getMax() const;
+	double GetMin() const;
+	double GetMax() const;
 
 	void Update(double value);
 

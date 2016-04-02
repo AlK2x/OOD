@@ -2,6 +2,42 @@
 
 #include "IBeverage.h"
 
+enum class ShakeSize
+{
+	Small,
+	Medium,
+	Large
+};
+
+enum class TeaType
+{
+	White,
+	Green,
+	Red,
+	BlowMyMind
+};
+
+std::string GetTeaNameByTeaType(TeaType type)
+{
+	switch (type)
+	{
+	case TeaType::White:
+		return "White Tea";
+		break;
+	case TeaType::Green:
+		return "Green Tea";
+		break;
+	case TeaType::Red:
+		return "Red Tea";
+		break;
+	case TeaType::BlowMyMind:
+		return "Blow My Mind Tea";
+		break;
+	default:
+		return "Tea";
+	}
+}
+
 // Базовая реализация напитка, предоставляющая его описание
 class CBeverage : public IBeverage
 {
@@ -46,6 +82,19 @@ public:
 	}
 };
 
+class CDoubleCapuccino : public CCoffee
+{
+public:
+	CDoubleCapuccino()
+		:CCoffee("Double Capuccion")
+	{}
+
+	double GetCost() const override
+	{
+		return 120;
+	}
+};
+
 // Латте
 class CLatte : public CCoffee
 {
@@ -57,6 +106,19 @@ public:
 	double GetCost() const override 
 	{
 		return 90; 
+	}
+};
+
+class CDoubleLatte : public CCoffee
+{
+public:
+	CDoubleLatte()
+		:CCoffee("Double Latte")
+	{}
+
+	double GetCost() const override
+	{
+		return 130;
 	}
 };
 
@@ -74,16 +136,41 @@ public:
 	}
 };
 
+class CSpecialTea : public CBeverage
+{
+public:
+	CSpecialTea(TeaType teaSort = TeaType::Green)
+		:CBeverage(GetTeaNameByTeaType(teaSort))
+	{}
+
+	double GetCost() const override
+	{
+		return 42;
+	}
+};
+
 // Молочный коктейль
 class CMilkshake : public CBeverage
 {
 public:
-	CMilkshake() 
-		:CBeverage("Milkshake") 
+	CMilkshake(ShakeSize size = ShakeSize::Large) 
+		:CBeverage("Milkshake"), m_shakeSize(size)
 	{}
 
 	double GetCost() const override 
 	{ 
+		if (m_shakeSize == ShakeSize::Small)
+		{
+			return 50;
+		}
+
+		if (m_shakeSize == ShakeSize::Medium)
+		{
+			return 60;
+		}
+
 		return 80; 
 	}
+private:
+	ShakeSize m_shakeSize;
 };

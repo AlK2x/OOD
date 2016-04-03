@@ -6,7 +6,7 @@
 class CBadWeatherData : public IObserver<SWeatherInfo>
 {
 public:
-	CBadWeatherData(IObservable<SWeatherInfo> & wd);
+	CBadWeatherData(IObservable<SWeatherInfo> && wd);
 
 	void Update(SWeatherInfo const & data);
 private:

@@ -60,6 +60,9 @@
     <ClInclude Include="..\WeatherStation\SensorStatistic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\WeatherStation\WindSensorStatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -72,9 +75,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\WeatherStation\Display.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\WeatherStation\Observable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\WeatherStation\StatsDisplay.cpp">
@@ -90,6 +90,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\WeatherStation\SensorStatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\WeatherStation\WindSensorStatistic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

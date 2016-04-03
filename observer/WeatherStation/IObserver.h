@@ -1,5 +1,4 @@
 #pragma once
-#include "IObservable.h"
 #include "WeatherInfo.h"
 
 template <class T>

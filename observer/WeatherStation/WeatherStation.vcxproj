@@ -74,8 +74,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <ExecutablePath>C:\SDK\boost_1_60_0;C:\SDK\boost_1_57_0;$(ExecutablePath)</ExecutablePath>
-    <LibraryPath>C:\SDK\boost_1_60_0\stage\lib;C:\SDK\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>C:\SDK\boost;C:\SDK\boost_1_57_0;$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>C:\SDK\boost\stage\lib;C:\SDK\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -101,7 +101,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\SDK\boost_1_60_0;C:\SDK\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDK\boost;C:\SDK\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

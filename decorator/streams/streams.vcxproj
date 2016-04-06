@@ -148,11 +148,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MemoryInputStream.cpp" />
+    <ClCompile Include="MemoryOutputStream.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IInputDataStream.h" />
     <ClInclude Include="IOutputDataStream.h" />
     <ClInclude Include="MemoryInputStream.h" />
+    <ClInclude Include="MemoryOutputStream.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

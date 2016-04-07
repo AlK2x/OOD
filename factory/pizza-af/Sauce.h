@@ -8,3 +8,21 @@ public:
 
 	virtual ~ISauce() = default;
 };
+
+class CMarinaraSauce : public ISauce
+{
+	std::string ToString() const override
+	{
+		return "Marinara Sauce";
+	}
+
+};
+
+class CPlumTomatoSauce : public ISauce
+{
+	// Inherited via ISauce
+	virtual std::string ToString() const override
+	{
+		return "Plum Tomato";
+	}
+};

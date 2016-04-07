@@ -8,3 +8,20 @@ public:
 
 	virtual ~ICheese() = default;
 };
+
+class CReggianoCheese : public ICheese
+{
+	std::string ToString() const override
+	{
+		return "Reggiano Cheese";
+	}
+
+};
+
+class CMazarellaCheese : public ICheese
+{
+	std::string ToString() const override
+	{
+		return "Mazarellls Cheese";
+	}
+};

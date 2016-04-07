@@ -9,18 +9,13 @@
 #include <memory>
 #include <vector>
 #include <iostream>
+#include "PizzaIngredientFactory.h"
 
 
 class CPizza
 {
 public:
-
 	virtual void Prepare() = 0;
-
-	CPizza(const std::string & name)
-		:m_name(name)
-	{
-	}
 
 	void Bake()
 	{
@@ -42,8 +37,14 @@ public:
 		return m_name;
 	}
 
+	void SetName(const std::string & name)
+	{
+		m_name = name;
+	}
+
 	std::string ToString()const
 	{
+		// Код вывода описания пиццы
 		std::string result;
 		result.append("---- " + m_name + " ----\n");
 		if (m_dough)
@@ -88,7 +89,62 @@ protected:
 
 class CCheesePizza : public CPizza
 {
-	// Тесто
-	// Соус
-	// Сыр
+public:
+	CCheesePizza(std::unique_ptr<IPizzaIngredientFactory> && factory)
+		: m_ingredientFactory(std::move(factory))
+	{
+	}
+
+	virtual void Prepare() override
+	{
+		std::cout << "Preparing " << GetName() << std::endl;
+
+		m_dough = m_ingredientFactory->CreateDough();
+		m_sauce = m_ingredientFactory->CreateSauce();
+		m_cheese = m_ingredientFactory->CreateCheese();
+	}
+
+private:
+	std::unique_ptr<IPizzaIngredientFactory> m_ingredientFactory;
+};
+
+class CClamPizza : public CPizza
+{
+public:
+	CClamPizza(std::unique_ptr<IPizzaIngredientFactory> && factory)
+		:m_ingredientFactory(std::move(factory))
+	{
+	}
+
+	virtual void Prepare() override
+	{
+		std::cout << "Preparing" << GetName() << std::endl;
+
+		m_dough = m_ingredientFactory->CreateDough();
+		m_sauce = m_ingredientFactory->CreateSauce();
+		m_cheese = m_ingredientFactory->CreateCheese();
+		m_clam = m_ingredientFactory->CreateClam();
+	}
+
+private:
+
+	std::unique_ptr<IPizzaIngredientFactory> m_ingredientFactory;
+};
+
+class CLavash : public CPizza
+{
+public:
+	CLavash(const DoughFactory & doughtFactory)
+		:m_doughtFactory(doughtFactory)
+	{
+
+	}
+
+	virtual void Prepare() override
+	{
+		m_dough = m_doughtFactory();
+	}
+
+private:
+	DoughFactory m_doughtFactory;
 };

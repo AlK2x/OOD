@@ -18,3 +18,58 @@ public:
 		return "Black Olives";
 	}
 };
+
+class CGarlic : public IVeggies
+{
+public:
+	virtual std::string ToString() const override
+	{
+		return "Garlic";
+	}
+};
+
+class COnion : public IVeggies
+{
+public:
+	std::string ToString() const override
+	{
+		return "Onion";
+	}
+};
+
+class CMushroom : public IVeggies
+{
+public:
+	std::string ToString() const override
+	{
+		return "Mushrooms";
+	}
+
+};
+
+class CRedPepper : public IVeggies
+{
+public:
+	std::string ToString() const override
+	{
+		return "Red Pepper";
+	}
+};
+
+class CSpanich : public IVeggies
+{
+public:
+	std::string ToString() const override
+	{
+		return "Spanich";
+	}
+};
+
+class CEggplant : public IVeggies
+{
+public:
+	std::string ToString() const override
+	{
+		return "Eggplant";
+	}
+};

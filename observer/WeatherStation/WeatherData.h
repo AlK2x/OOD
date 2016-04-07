@@ -7,7 +7,7 @@
 class CWeatherData : public CObservable<SWeatherInfo>
 {
 public:
-	CWeatherData(Location location)
+	CWeatherData(Location location = Location::Outdoor)
 		:m_loc(location) {}
 
 	// Температура в градусах Цельсия

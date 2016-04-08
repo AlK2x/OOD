@@ -146,11 +146,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileInputStream.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MemoryInputStream.cpp" />
     <ClCompile Include="MemoryOutputStream.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileInputStream.h" />
     <ClInclude Include="IInputDataStream.h" />
     <ClInclude Include="IOutputDataStream.h" />
     <ClInclude Include="MemoryInputStream.h" />

@@ -8,6 +8,8 @@
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
 public:
+	CStatsDisplay(CWeatherData * subject) : m_subejct(subject) {}
+
 	void Update(IObservable<SWeatherInfo> const& subject) override;
 private:
 	void DisplayData(CSensorStatistic const & stats) const;
@@ -17,4 +19,6 @@ private:
 	CSensorStatistic m_humidity;
 	CSensorStatistic m_windSpeed;
 	CWindSensorStatistic m_windDirection;
+
+	CWeatherData* m_subejct;
 };

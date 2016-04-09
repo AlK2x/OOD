@@ -12,7 +12,7 @@ int main()
 	CDisplay display(&out);
 	out.RegisterObserver(display);
 	
-	CStatsDisplay statsDisplay;
+	CStatsDisplay statsDisplay(&out);
 	out.RegisterObserver(statsDisplay);
 
 	out.SetMeasurements(3, 0.7, 760, 10, 180);

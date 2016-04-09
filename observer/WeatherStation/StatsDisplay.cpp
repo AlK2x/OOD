@@ -5,19 +5,17 @@
 
 void CStatsDisplay::Update(IObservable<SWeatherInfo> const& subject)
 {
-	const CWeatherData * subj = dynamic_cast<const CWeatherData*>(&subject);
-	if (subj == NULL)
+	if (&subject != m_subejct)
 	{
 		return;
 	}
+	m_temp.Update(m_subejct->GetTemperature());
+	m_pressure.Update(m_subejct->GetPressure());
+	m_humidity.Update(m_subejct->GetHumidity());
+	m_windSpeed.Update(m_subejct->GetWindSpeed());
+	m_windDirection.Update(m_subejct->GetWindSpeed(), m_subejct->GetWindDirection());
 
-	m_temp.Update(subj->GetTemperature());
-	m_pressure.Update(subj->GetPressure());
-	m_humidity.Update(subj->GetHumidity());
-	m_windSpeed.Update(subj->GetWindSpeed());
-	m_windDirection.Update(subj->GetWindSpeed(), subj->GetWindDirection());
-
-	switch (subj->GetLocation())
+	switch (m_subejct->GetLocation())
 	{
 	case Location::Indoor :
 		std::cout << "INDOOR" << std::endl;

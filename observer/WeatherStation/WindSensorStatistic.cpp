@@ -14,7 +14,14 @@ void CWindSensorStatistic::Update(double speed, double angle)
 
 	if (m_x > 0 && m_y >= 0)
 	{
-		m_average = std::atan(m_y / m_x) * 180 / M_PI;
+		if (IsEqual(m_y, 0.0))
+		{
+			m_average = 0.0;
+		}
+		else
+		{
+			m_average = std::atan(m_y / m_x) * 180 / M_PI;
+		}
 	}
 	else if (m_x <= 0 && m_y > 0)
 	{

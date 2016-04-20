@@ -56,12 +56,12 @@ public:
 	}
 };
 
-class CSpanich : public IVeggies
+class CSpinach : public IVeggies
 {
 public:
 	std::string ToString() const override
 	{
-		return "Spanich";
+		return "Spinach";
 	}
 };
 

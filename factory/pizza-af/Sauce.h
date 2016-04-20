@@ -11,18 +11,18 @@ public:
 
 class CMarinaraSauce : public ISauce
 {
+public:
 	std::string ToString() const override
 	{
 		return "Marinara Sauce";
 	}
-
 };
 
 class CPlumTomatoSauce : public ISauce
 {
-	// Inherited via ISauce
-	virtual std::string ToString() const override
+public:
+	std::string ToString() const override
 	{
-		return "Plum Tomato";
+		return "Plum Tomato Sauce";
 	}
 };

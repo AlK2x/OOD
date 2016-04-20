@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Cheese.h"
 #include "Clams.h"
 #include "Dough.h"
@@ -44,7 +44,7 @@ public:
 
 	std::string ToString()const
 	{
-		// ��� ������ �������� �����
+		// Код вывода описания пиццы
 		std::string result;
 		result.append("---- " + m_name + " ----\n");
 		if (m_dough)
@@ -95,7 +95,7 @@ public:
 	{
 	}
 
-	virtual void Prepare() override
+	void Prepare() override
 	{
 		std::cout << "Preparing " << GetName() << std::endl;
 
@@ -103,48 +103,51 @@ public:
 		m_sauce = m_ingredientFactory->CreateSauce();
 		m_cheese = m_ingredientFactory->CreateCheese();
 	}
-
 private:
 	std::unique_ptr<IPizzaIngredientFactory> m_ingredientFactory;
 };
 
+/* Пицца из мидий - тесто, соус, сыр, мидии*/
 class CClamPizza : public CPizza
 {
 public:
 	CClamPizza(std::unique_ptr<IPizzaIngredientFactory> && factory)
-		:m_ingredientFactory(std::move(factory))
+		: m_ingredientFactory(std::move(factory))
 	{
 	}
 
-	virtual void Prepare() override
+	void Prepare() override
 	{
-		std::cout << "Preparing" << GetName() << std::endl;
+		std::cout << "Preparing " << GetName() << std::endl;
 
 		m_dough = m_ingredientFactory->CreateDough();
 		m_sauce = m_ingredientFactory->CreateSauce();
 		m_cheese = m_ingredientFactory->CreateCheese();
 		m_clam = m_ingredientFactory->CreateClam();
 	}
-
 private:
-
 	std::unique_ptr<IPizzaIngredientFactory> m_ingredientFactory;
 };
 
+/*
+Лаваш - иллюстрирует использование фабрики в функциональном стиле
+Вместо одной большой универсальной фабрики принимает одну мини-фабрику по производству теста
+Если понадобится использовать более одного ингредиента, можно передать доп. мини-фабрику
+*/
 class CLavash : public CPizza
 {
 public:
-	CLavash(const DoughFactory & doughtFactory)
-		:m_doughtFactory(doughtFactory)
+	CLavash(const DoughFactory & doughFactory 
+		/* при желании можно добавить дополнительные мини-фабрики ингредиентов*/)
+		:m_doughFactory(doughFactory)
 	{
-
 	}
-
-	virtual void Prepare() override
+	void Prepare() override
 	{
-		m_dough = m_doughtFactory();
-	}
+		std::cout << "Preparing " << GetName() << std::endl;
 
+		m_dough = m_doughFactory();
+	}
 private:
-	DoughFactory m_doughtFactory;
+	DoughFactory m_doughFactory;
 };

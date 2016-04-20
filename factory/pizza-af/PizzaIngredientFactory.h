@@ -11,10 +11,11 @@
 
 typedef std::function<std::unique_ptr<IDough>()> DoughFactory;
 
-std::unique_ptr<IDough> ThickCrustDoughtFactory()
+std::unique_ptr<IDough> ThickCrustDoughFactory()
 {
-	return std::make_unique<CThinCrustDough>();
+	return std::make_unique<CThickCrustDough>();
 }
+
 
 class IPizzaIngredientFactory
 {
@@ -29,8 +30,9 @@ public:
 	virtual ~IPizzaIngredientFactory() = default;
 };
 
-class CNyPizzaIngredientFactory : public IPizzaIngredientFactory
+class CNYPizzaIngredientFactory : public IPizzaIngredientFactory
 {
+public:
 	std::unique_ptr<IDough> CreateDough() override
 	{
 		return std::make_unique<CThinCrustDough>();
@@ -49,11 +51,14 @@ class CNyPizzaIngredientFactory : public IPizzaIngredientFactory
 	std::vector<std::unique_ptr<IVeggies>> CreateVeggies() override
 	{
 		using namespace std;
-		vector<unique_ptr<IVeggies>> veggies;
-		veggies.push_back(unique_ptr<IVeggies>(new CGarlic()));
-		veggies.push_back(unique_ptr<IVeggies>(new COnion()));
-		veggies.push_back(unique_ptr<IVeggies>(new CMushroom()));
-		veggies.push_back(unique_ptr<IVeggies>(new CRedPepper()));
+		typedef unique_ptr<IVeggies> IVeggiesPtr;
+
+		vector<IVeggiesPtr > veggies;
+		veggies.push_back(IVeggiesPtr(new CGarlic()));
+		veggies.push_back(IVeggiesPtr(new COnion()));
+		veggies.push_back(IVeggiesPtr(new CMushroom()));
+		veggies.push_back(IVeggiesPtr(new CRedPepper()));
+
 		return veggies;
 	}
 
@@ -70,32 +75,41 @@ class CNyPizzaIngredientFactory : public IPizzaIngredientFactory
 
 class CChicagoPizzaIngredientFactory : public IPizzaIngredientFactory
 {
-	virtual std::unique_ptr<IDough> CreateDough() override
+public:
+	std::unique_ptr<IDough> CreateDough() override
 	{
-		return std::make_unique<CThinCrustDough>();
+		return std::make_unique<CThickCrustDough>();
 	}
-	virtual std::unique_ptr<ISauce> CreateSauce() override
+
+	std::unique_ptr<ISauce> CreateSauce() override
 	{
 		return std::make_unique<CPlumTomatoSauce>();
 	}
-	virtual std::unique_ptr<ICheese> CreateCheese() override
+	
+	std::unique_ptr<ICheese> CreateCheese() override
 	{
-		return std::make_unique<CMazarellaCheese>();
+		return std::make_unique<CMozarellaCheese>();
 	}
-	virtual std::vector<std::unique_ptr<IVeggies>> CreateVeggies() override
+	
+	std::vector<std::unique_ptr<IVeggies>> CreateVeggies() override
 	{
 		using namespace std;
-		vector<unique_ptr<IVeggies>> veggies;
-		veggies.push_back(unique_ptr<IVeggies>(new CBlackOlives()));
-		veggies.push_back(unique_ptr<IVeggies>(new CSpanich()));
-		veggies.push_back(unique_ptr<IVeggies>(new CEggplant()));
+		typedef unique_ptr<IVeggies> IVeggiesPtr;
+
+		vector<IVeggiesPtr > veggies;
+		veggies.push_back(IVeggiesPtr(new CBlackOlives()));
+		veggies.push_back(IVeggiesPtr(new CSpinach()));
+		veggies.push_back(IVeggiesPtr(new CEggplant()));
+
 		return veggies;
 	}
-	virtual std::unique_ptr<IPepperoni> CreatePepperoni() override
+	
+	std::unique_ptr<IPepperoni> CreatePepperoni() override
 	{
-		throw::std::logic_error("Not implemented");
+		return std::make_unique<CSlicedPepperoni>();
 	}
-	virtual std::unique_ptr<IClams> CreateClam() override
+	
+	std::unique_ptr<IClams> CreateClam() override
 	{
 		return std::make_unique<CFrozenClams>();
 	}

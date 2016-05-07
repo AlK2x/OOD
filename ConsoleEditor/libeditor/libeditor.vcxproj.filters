@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Menu">
+      <UniqueIdentifier>{1bb8875a-d201-49ca-aab0-a8d27fd3bb2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Command">
+      <UniqueIdentifier>{2f782079-fed9-456a-b09e-8699d6c5d7a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Editor">
+      <UniqueIdentifier>{b9d14bb0-57f8-43fa-987c-9769918ad72f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Document">
+      <UniqueIdentifier>{7e6e253c-f9a6-47e1-9797-5d91a1f88336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DocumentItem">
+      <UniqueIdentifier>{76b24a41-e6f0-4f9c-9170-c1852fce115c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Source Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommand.h">
+      <Filter>Source Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommand_fwd.h">
+      <Filter>Source Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor.h">
+      <Filter>Source Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="IDocument.h">
+      <Filter>Source Files\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="Document.h">
+      <Filter>Source Files\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractCommand.h">
+      <Filter>Source Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeStringCommand.h">
+      <Filter>Source Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="IImage.h">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="IParagraph.h">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstDocumentItem.h">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentItem.h">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="History.h">
+      <Filter>Source Files\Document</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Document.cpp">
+      <Filter>Source Files\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeStringCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstDocumentItem.cpp">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentItem.cpp">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="History.cpp">
+      <Filter>Source Files\Document</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

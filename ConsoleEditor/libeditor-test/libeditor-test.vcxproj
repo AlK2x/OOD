@@ -157,7 +157,9 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ChangeStringHistoryTest.cpp" />
     <ClCompile Include="DocumentTests.cpp" />
+    <ClCompile Include="HistoryTest.cpp" />
     <ClCompile Include="libeditor-test.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

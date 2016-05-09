@@ -35,5 +35,11 @@
     <ClCompile Include="DocumentTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HistoryTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeStringHistoryTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

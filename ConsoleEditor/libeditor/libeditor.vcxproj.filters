@@ -75,6 +75,9 @@
     <ClInclude Include="History.h">
       <Filter>Source Files\Document</Filter>
     </ClInclude>
+    <ClInclude Include="Paragraph.h">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -100,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="History.cpp">
       <Filter>Source Files\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="Paragraph.cpp">
+      <Filter>Source Files\DocumentItem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

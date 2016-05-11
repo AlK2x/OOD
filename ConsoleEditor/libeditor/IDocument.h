@@ -4,14 +4,15 @@
 #include <boost\optional.hpp>
 #include <boost\none.hpp>
 #include "ConstDocumentItem.h"
+#include "IParagraph.h"
 
 class IDocument
 {
 public:
 	// ¬ставл€ет параграф текста в указанную позицию (сдвига€ последующие элементы)
 	// ≈сли параметр position не указан, вставка происходит в конец документа
-	//virtual std::shared_ptr<IParagraph> InsertParagraph(const std::string& text,
-	//	boost::optional<size_t> position = boost::none) = 0;
+	virtual std::shared_ptr<IParagraph> InsertParagraph(const std::string& text,
+		boost::optional<size_t> position = boost::none) = 0;
 
 	//// ¬ставл€ет изображение в указанную позицию (сдвига€ последующие элементы)
 	//// ѕараметр path задает путь к вставл€емому изображению

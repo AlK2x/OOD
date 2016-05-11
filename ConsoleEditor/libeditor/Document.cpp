@@ -33,3 +33,10 @@ void CDocument::Redo()
 {
 	m_history.Redo();
 }
+
+std::shared_ptr<IParagraph> CDocument::InsertParagraph(const std::string & text, boost::optional<size_t> position = boost::none)
+{
+	(void)text;
+	(void)position;
+	return std::shared_ptr<CParagraph>();
+}

@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "Document.h"
 #include <iostream>
+#include <sstream>
 
 class CEditor
 {
@@ -11,10 +12,11 @@ public:
 	{
 		m_menu.AddItem("help", "Help", [this](std::istream&) { m_menu.ShowInstructions(); });
 		m_menu.AddItem("exit", "Exit", [this](std::istream&) { m_menu.Exit(); });
-		AddMenuItem("setTitle", "Changes title. Args: <new title>", &CEditor::SetTitle);
+		AddMenuItem("SetTitle", "Changes title. Args: <new title>", &CEditor::SetTitle);
 		m_menu.AddItem("list", "Show document", std::bind(&CEditor::List, this, std::placeholders::_1));
 		AddMenuItem("undo", "Undo command", &CEditor::Undo);
 		AddMenuItem("redo", "Redo undone command", &CEditor::Redo);
+		AddMenuItem("InsertParagraph", "Insert paragraph. Args: <position>|end <paragraph text>", &CEditor::InsertParagraph);
 	}
 
 	void Start()
@@ -51,6 +53,19 @@ private:
 		std::cout << "-------------" << std::endl;
 		std::cout << m_document->GetTitle() << std::endl;
 		std::cout << "-------------" << std::endl;
+	}
+
+	void InsertParagraph(std::istream & in)
+	{
+		std::string position;
+		std::string paragraphText;
+		in >> position;
+		in >> std::ws;
+		getline(in, paragraphText);
+		if (position == "end")
+		{
+			m_document->InsertParagraph(paragraphText);
+		}
 	}
 
 	void Undo(std::istream &)

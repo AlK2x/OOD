@@ -52,6 +52,7 @@ private:
 	{
 		std::cout << "-------------" << std::endl;
 		std::cout << m_document->GetTitle() << std::endl;
+		std::cout << m_document->GetItem(0).GetParagraph()->GetText() << std::endl;
 		std::cout << "-------------" << std::endl;
 	}
 

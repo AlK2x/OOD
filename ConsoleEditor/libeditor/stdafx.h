@@ -19,3 +19,5 @@
 #include <vector>
 #include <deque>
 #include <istream>
+#include <boost\optional.hpp>
+#include <boost\none.hpp>

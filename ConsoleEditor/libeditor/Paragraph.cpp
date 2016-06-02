@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Paragraph.h"
 
-
-CParagraph::CParagraph()
+std::string CParagraph::GetText() const
 {
+	return m_text;
 }
 
-
-CParagraph::~CParagraph()
+void CParagraph::SetText(const std::string & text)
 {
+	m_text = text;
 }

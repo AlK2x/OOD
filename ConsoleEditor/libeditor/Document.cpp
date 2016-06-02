@@ -34,9 +34,16 @@ void CDocument::Redo()
 	m_history.Redo();
 }
 
-std::shared_ptr<IParagraph> CDocument::InsertParagraph(const std::string & text, boost::optional<size_t> position = boost::none)
+CConstDocumentItem CDocument::GetItem(size_t index) const
 {
-	(void)text;
-	(void)position;
-	return std::shared_ptr<CParagraph>();
+	IParagraphPtr paragraph = m_paragraps.at(index);
+	return CConstDocumentItem(paragraph);
+}
+
+std::shared_ptr<IParagraph> CDocument::InsertParagraph(const std::string & text, boost::optional<size_t> position)
+{
+	IParagraphPtr paragraph = std::make_shared<CParagraph>();
+	paragraph->SetText(text);
+	m_paragraps.push_back(paragraph);
+	return paragraph;
 }

@@ -1,8 +1,7 @@
 #pragma once
+#include "stdafx.h"
 #include <memory>
 #include <string>
-#include <boost\optional.hpp>
-#include <boost\none.hpp>
 #include "ConstDocumentItem.h"
 #include "IParagraph.h"
 
@@ -24,8 +23,8 @@ public:
 	//// Возвращает количество элементов в документе
 	//virtual size_t GetItemsCount()const = 0;
 
-	//// Доступ к элементам изображения
-	//virtual CConstDocumentItem GetItem(size_t index)const = 0;
+	// Доступ к элементам изображения
+	virtual CConstDocumentItem GetItem(size_t index)const = 0;
 	//virtual CDocumentItem GetItem(size_t index) = 0;
 
 	//// Удаляет элемент из документа

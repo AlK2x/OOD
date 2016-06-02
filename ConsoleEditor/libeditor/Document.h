@@ -2,8 +2,12 @@
 #include "IDocument.h"
 #include "History.h"
 #include "Paragraph.h"
+#include "DocumentItem.h"
 
-class CDocument:public IDocument
+typedef std::shared_ptr<IParagraph> IParagraphPtr;
+typedef std::shared_ptr<CDocumentItem> CDocumentItemPtr;
+
+class CDocument : public IDocument
 {
 public:
 
@@ -18,5 +22,9 @@ public:
 
 private:
 	std::string m_title;
-	CHistory m_history;	
+	CHistory m_history;
+	std::vector<IParagraphPtr> m_paragraps;
+
+	// Inherited via IDocument
+	virtual CConstDocumentItem GetItem(size_t index) const override;
 };

@@ -81,6 +81,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -132,10 +133,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AbstractCommand.h" />
+    <ClInclude Include="ChangeParagraphCommand.h" />
     <ClInclude Include="ChangeStringCommand.h" />
     <ClInclude Include="ConstDocumentItem.h" />
     <ClInclude Include="Document.h" />
     <ClInclude Include="DocumentItem.h" />
+    <ClInclude Include="DocumentItemCollection.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="ICommand.h" />
@@ -150,10 +153,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractCommand.cpp" />
+    <ClCompile Include="ChangeParagraphCommand.cpp" />
     <ClCompile Include="ChangeStringCommand.cpp" />
     <ClCompile Include="ConstDocumentItem.cpp" />
     <ClCompile Include="Document.cpp" />
     <ClCompile Include="DocumentItem.cpp" />
+    <ClCompile Include="DocumentItemCollection.cpp" />
     <ClCompile Include="History.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Paragraph.cpp" />

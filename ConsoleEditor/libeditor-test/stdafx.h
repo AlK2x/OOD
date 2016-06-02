@@ -20,3 +20,5 @@
 
 #include <boost/range/algorithm/copy.hpp>
 #include <boost/algorithm/cxx11/all_of.hpp>
+
+#include <boost\none.hpp>

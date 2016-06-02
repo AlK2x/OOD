@@ -1,6 +1,7 @@
 #pragma once
 #include "Menu.h"
 #include "Document.h"
+#include "DocumentItemFormatter.h"
 #include <iostream>
 #include <sstream>
 
@@ -54,7 +55,8 @@ private:
 		std::cout << m_document->GetTitle() << std::endl;
 		for (size_t i = 0; i < m_document->GetItemsCount(); ++i)
 		{
-			std::cout << m_document->GetItem(i).GetParagraph()->GetText() << std::endl;
+			std::cout << m_formatter.FormatForList(m_document->GetItem(i), i) << std::endl;
+			std::cout << m_formatter.FormatForHtml(m_document->GetItem(i)) << std::endl;
 		}
 		std::cout << "-------------" << std::endl;
 	}
@@ -104,5 +106,6 @@ private:
 	}
 
 	CMenu m_menu;
+	CDocumentItemFormatter m_formatter;
 	std::unique_ptr<IDocument> m_document;
 };

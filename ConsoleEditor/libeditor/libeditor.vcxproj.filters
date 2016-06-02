@@ -84,6 +84,9 @@
     <ClInclude Include="InsertDocumentItemCommand.h">
       <Filter>Source Files\Command</Filter>
     </ClInclude>
+    <ClInclude Include="DocumentItemFormatter.h">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="InsertDocumentItemCommand.cpp">
       <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentItemFormatter.cpp">
+      <Filter>Source Files\DocumentItem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

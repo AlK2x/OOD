@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClCompile Include="ChangeStringHistoryTest.cpp" />
     <ClCompile Include="DocumentItemCollectionTest.cpp" />
+    <ClCompile Include="DocumentItemFormatter.cpp" />
     <ClCompile Include="DocumentTests.cpp" />
     <ClCompile Include="HistoryTest.cpp" />
     <ClCompile Include="libeditor-test.cpp" />

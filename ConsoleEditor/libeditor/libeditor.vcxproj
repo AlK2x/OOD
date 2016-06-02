@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AbstractCommand.h" />
+    <ClInclude Include="DocumentItemFormatter.h" />
     <ClInclude Include="InsertDocumentItemCommand.h" />
     <ClInclude Include="ChangeStringCommand.h" />
     <ClInclude Include="ConstDocumentItem.h" />
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractCommand.cpp" />
+    <ClCompile Include="DocumentItemFormatter.cpp" />
     <ClCompile Include="InsertDocumentItemCommand.cpp" />
     <ClCompile Include="ChangeStringCommand.cpp" />
     <ClCompile Include="ConstDocumentItem.cpp" />

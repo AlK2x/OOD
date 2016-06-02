@@ -16,8 +16,9 @@ BOOST_FIXTURE_TEST_SUITE(DocumentItemCollection, Document_item_collection_)
 
 		BOOST_AUTO_TEST_CASE(cant_get_item)
 		{
-			boost::optional<CDocumentItemPtr> item = collection.GetItem(0);
-			if (item)
+			CDocumentItemPtr item = collection.GetItem(0);
+
+			if (item != nullptr)
 			{
 				BOOST_CHECK(false);
 			}
@@ -62,7 +63,7 @@ BOOST_FIXTURE_TEST_SUITE(DocumentItemCollection, Document_item_collection_)
 		{
 			CDocumentItemPtr itemPtr = std::shared_ptr<CDocumentItem>();
 			collection.AddItem(itemPtr, boost::none);
-			BOOST_CHECK_EQUAL(collection.GetItem(1).get().get(), itemPtr.get());
+			BOOST_CHECK_EQUAL(collection.GetItem(1).get(), itemPtr.get());
 		}
 
 		BOOST_AUTO_TEST_CASE(cant_add_item_out_of_range)
@@ -71,7 +72,7 @@ BOOST_FIXTURE_TEST_SUITE(DocumentItemCollection, Document_item_collection_)
 			bool result = collection.AddItem(itemPtr, 3);
 			BOOST_CHECK_EQUAL(result, false);
 			BOOST_CHECK_EQUAL(collection.GetSize(), 1);
-			BOOST_CHECK_EQUAL(itemPtrI.get(), collection.GetItem(0).get().get());
+			BOOST_CHECK_EQUAL(itemPtrI.get(), collection.GetItem(0).get());
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 

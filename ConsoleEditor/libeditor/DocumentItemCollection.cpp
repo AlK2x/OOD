@@ -33,7 +33,7 @@ bool CDocumentItemCollection::RemoveItem(size_t position)
 	return true;
 }
 
-boost::optional<CDocumentItemPtr> CDocumentItemCollection::GetItem(size_t index) const
+CDocumentItemPtr CDocumentItemCollection::GetItem(size_t index) const
 {
 	try
 	{
@@ -41,7 +41,7 @@ boost::optional<CDocumentItemPtr> CDocumentItemCollection::GetItem(size_t index)
 	}
 	catch (std::out_of_range)
 	{
-		return boost::none;
+		return nullptr;
 	}
 }
 

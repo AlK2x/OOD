@@ -20,8 +20,8 @@ public:
 	//virtual std::shared_ptr<IImage> InsertImage(const std::string& path, int width, int height,
 	//	boost::optional<size_t> position = boost::none) = 0;
 
-	//// Возвращает количество элементов в документе
-	//virtual size_t GetItemsCount()const = 0;
+	// Возвращает количество элементов в документе
+	virtual size_t GetItemsCount()const = 0;
 
 	// Доступ к элементам изображения
 	virtual CConstDocumentItem GetItem(size_t index)const = 0;

@@ -78,11 +78,11 @@
     <ClInclude Include="Paragraph.h">
       <Filter>Source Files\DocumentItem</Filter>
     </ClInclude>
-    <ClInclude Include="ChangeParagraphCommand.h">
-      <Filter>Source Files\Command</Filter>
-    </ClInclude>
     <ClInclude Include="DocumentItemCollection.h">
       <Filter>Source Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="InsertDocumentItemCommand.h">
+      <Filter>Source Files\Command</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,11 +113,11 @@
     <ClCompile Include="Paragraph.cpp">
       <Filter>Source Files\DocumentItem</Filter>
     </ClCompile>
-    <ClCompile Include="ChangeParagraphCommand.cpp">
-      <Filter>Source Files\Command</Filter>
-    </ClCompile>
     <ClCompile Include="DocumentItemCollection.cpp">
       <Filter>Source Files\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="InsertDocumentItemCommand.cpp">
+      <Filter>Source Files\Command</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

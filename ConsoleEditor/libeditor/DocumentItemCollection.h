@@ -1,15 +1,19 @@
 #pragma once
 #include <vector>
+#include <boost\optional.hpp>
 #include "DocumentItem.h"
-#include "Document.h"
+//#include "Document.h"
 
 class CDocumentItemCollection
 {
 public:
+	CDocumentItemCollection() {}
+	~CDocumentItemCollection() = default;
+
 	bool AddItem(CDocumentItemPtr item, boost::optional<size_t> position);
 	bool RemoveItem(size_t position);
 
-	boost::optional<CDocumentItemPtr> GetItem(size_t index) const;
+	CDocumentItemPtr GetItem(size_t index) const;
 	size_t GetSize() const;
 
 private:

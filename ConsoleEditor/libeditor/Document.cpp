@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Document.h"
 #include "ChangeStringCommand.h"
+#include "InsertDocumentItemCommand.h"
 
 using namespace std;
 
@@ -36,14 +37,26 @@ void CDocument::Redo()
 
 CConstDocumentItem CDocument::GetItem(size_t index) const
 {
-	IParagraphPtr paragraph = m_paragraps.at(index);
-	return CConstDocumentItem(paragraph);
+	CDocumentItemPtr item = m_items.GetItem(index);
+	if (item == nullptr)
+	{
+		throw std::out_of_range("Element does not exist. Index: " + index);
+	}
+
+	return *item.get();
+}
+
+size_t CDocument::GetItemsCount() const
+{
+	return m_items.GetSize();
 }
 
 std::shared_ptr<IParagraph> CDocument::InsertParagraph(const std::string & text, boost::optional<size_t> position)
 {
 	IParagraphPtr paragraph = std::make_shared<CParagraph>();
 	paragraph->SetText(text);
-	m_paragraps.push_back(paragraph);
+	CDocumentItemPtr item = std::make_shared<CDocumentItem>(paragraph);
+
+	m_history.AddAndExecuteCommand(std::make_unique<CInsertDocumentItemCommand>(m_items, item, position));
 	return paragraph;
 }

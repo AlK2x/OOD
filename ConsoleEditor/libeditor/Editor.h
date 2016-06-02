@@ -52,20 +52,30 @@ private:
 	{
 		std::cout << "-------------" << std::endl;
 		std::cout << m_document->GetTitle() << std::endl;
-		std::cout << m_document->GetItem(0).GetParagraph()->GetText() << std::endl;
+		for (size_t i = 0; i < m_document->GetItemsCount(); ++i)
+		{
+			std::cout << m_document->GetItem(i).GetParagraph()->GetText() << std::endl;
+		}
 		std::cout << "-------------" << std::endl;
 	}
 
 	void InsertParagraph(std::istream & in)
 	{
-		std::string position;
+		std::string positionStr;
 		std::string paragraphText;
-		in >> position;
+		in >> positionStr;
 		in >> std::ws;
 		getline(in, paragraphText);
-		if (position == "end")
+		if (positionStr == "end")
 		{
 			m_document->InsertParagraph(paragraphText);
+		}
+		else
+		{
+			std::stringstream ss(positionStr);
+			size_t position;
+			ss >> position;
+			m_document->InsertParagraph(paragraphText, position);
 		}
 	}
 

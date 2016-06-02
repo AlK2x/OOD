@@ -67,7 +67,7 @@ BOOST_FIXTURE_TEST_SUITE(Document, Document_)
 	BOOST_FIXTURE_TEST_SUITE(with_paragraph, Document_with_inserted_paragraph_)
 		BOOST_AUTO_TEST_CASE(can_undo_command)
 		{
-			BOOST_CHECK_EQUAL(document.CanUndo(), false);
+			BOOST_CHECK_EQUAL(document.CanUndo(), true);
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 

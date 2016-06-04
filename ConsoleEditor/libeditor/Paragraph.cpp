@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Paragraph.h"
+#include <iostream>
 
 std::string CParagraph::GetText() const
 {
@@ -10,3 +11,4 @@ void CParagraph::SetText(const std::string & text)
 {
 	m_text = text;
 }
+

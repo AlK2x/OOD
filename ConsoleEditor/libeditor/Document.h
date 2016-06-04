@@ -5,14 +5,12 @@
 #include "DocumentItem.h"
 #include "DocumentItemCollection.h"
 
-typedef std::shared_ptr<IParagraph> IParagraphPtr;
-
 class CDocument : public IDocument
 {
 public:
 	void SetTitle(const std::string & title) override;
 	std::string GetTitle() const override;
-	virtual std::shared_ptr<IParagraph> InsertParagraph(const std::string & text, boost::optional<size_t> position = boost::none) override;
+	std::shared_ptr<IParagraph> InsertParagraph(const std::string & text, boost::optional<size_t> position = boost::none) override;
 
 	bool CanUndo() const override;
 	void Undo() override;
@@ -20,12 +18,17 @@ public:
 	void Redo() override;
 
 	CConstDocumentItem GetItem(size_t index) const override;
-	size_t GetItemsCount() const override;
+	//CDocumentItem GetItem(size_t index) override;
 
+	void DeleteItem(size_t index) override;
+
+	size_t GetItemsCount() const override;
+	
+	void Save(const std::string & path) const override;
+	
 private:
 	std::string m_title;
 	CHistory m_history;
 	CDocumentItemCollection m_items;
-
 	
 };

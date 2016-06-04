@@ -27,8 +27,8 @@ public:
 	virtual CConstDocumentItem GetItem(size_t index)const = 0;
 	//virtual CDocumentItem GetItem(size_t index) = 0;
 
-	//// Удаляет элемент из документа
-	//virtual void DeleteItem(size_t index) = 0;
+	// Удаляет элемент из документа
+	virtual void DeleteItem(size_t index) = 0;
 
 	// Возвращает заголовок документа
 	virtual std::string GetTitle()const = 0;
@@ -45,9 +45,9 @@ public:
 	// Выполняет отмененную команду редактирования
 	virtual void Redo() = 0;
 
-	//// Сохраняет документ в формате html. Изображения сохраняются в подкаталог images.
-	//// Пути к изображениям указываются относительно пути к сохраняемому HTML файлу
-	//virtual void Save(const std::string& path)const = 0;
+	// Сохраняет документ в формате html. Изображения сохраняются в подкаталог images.
+	// Пути к изображениям указываются относительно пути к сохраняемому HTML файлу
+	virtual void Save(const std::string& path)const = 0;
 
 	virtual ~IDocument() = default;
 };

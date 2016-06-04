@@ -22,4 +22,6 @@
 #include <boost\optional.hpp>
 #include <boost\none.hpp>
 #include <boost\format.hpp>
+#include <boost\filesystem.hpp>
+#include <boost\filesystem\fstream.hpp>
 

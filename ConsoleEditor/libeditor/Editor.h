@@ -18,6 +18,9 @@ public:
 		AddMenuItem("undo", "Undo command", &CEditor::Undo);
 		AddMenuItem("redo", "Redo undone command", &CEditor::Redo);
 		AddMenuItem("InsertParagraph", "Insert paragraph. Args: <position>|end <paragraph text>", &CEditor::InsertParagraph);
+		AddMenuItem("ReplaceParagraph", "Replace paragraph. Args: <position> <paragraph text>", &CEditor::ReplaceParagraph);
+		AddMenuItem("DeleteItem", "Delete Item. Args: <position>", &CEditor::DeleteItem);
+		AddMenuItem("Save", "Save the document. Args: <path>", &CEditor::Save);
 	}
 
 	void Start()
@@ -56,28 +59,114 @@ private:
 		for (size_t i = 0; i < m_document->GetItemsCount(); ++i)
 		{
 			std::cout << m_formatter.FormatForList(m_document->GetItem(i), i) << std::endl;
-			std::cout << m_formatter.FormatForHtml(m_document->GetItem(i)) << std::endl;
 		}
 		std::cout << "-------------" << std::endl;
 	}
 
 	void InsertParagraph(std::istream & in)
 	{
+		bool error = false;
+		boost::optional<size_t> position = ReadPosition(in, error);
+		
+		if (error)
+		{
+			ShowErrorMessage();
+		}
+		else
+		{
+			std::string paragraphText = ReadText(in);
+			try
+			{
+				m_document->InsertParagraph(paragraphText, position);
+			}
+			catch (std::out_of_range & e)
+			{
+				std::cout << e.what() << std::endl;
+			}
+			
+		}
+	}
+
+	boost::optional<size_t> ReadPosition(std::istream & in, bool & error)
+	{
 		std::string positionStr;
-		std::string paragraphText;
 		in >> positionStr;
 		in >> std::ws;
-		getline(in, paragraphText);
 		if (positionStr == "end")
 		{
-			m_document->InsertParagraph(paragraphText);
+			return boost::none;
 		}
 		else
 		{
 			std::stringstream ss(positionStr);
 			size_t position;
 			ss >> position;
-			m_document->InsertParagraph(paragraphText, position);
+
+			error = ss.fail() || ss.bad();
+			return position;
+		}
+	}
+
+	std::string ReadText(std::istream & in)
+	{
+		std::string text;
+		getline(in, text);
+		return text;
+	}
+
+	void ShowErrorMessage()
+	{
+		std::cout << "Invalid arguments. Use help." << std::endl;
+	}
+
+	void ReplaceParagraph(std::istream & in)
+	{
+		bool error = false;
+		boost::optional<size_t> position = ReadPosition(in, error);
+
+		if (error)
+		{
+			ShowErrorMessage();
+		}
+		else
+		{
+			std::cout << "Not implemented yet!" << std::endl;
+		}
+	}
+
+	void DeleteItem(std::istream & in)
+	{
+		bool error = false;
+		boost::optional<size_t> position = ReadPosition(in, error);
+
+		if (error || position == boost::none)
+		{
+			ShowErrorMessage();
+			return;
+		}
+		
+		try
+		{
+			m_document->DeleteItem(position.get());
+		}
+		catch (std::out_of_range & e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+		
+	}
+
+	void Save(std::istream & in)
+	{
+		in >> std::ws;
+		std::string path = ReadText(in);
+		try
+		{
+			m_document->Save(path);
+		}
+		catch (const std::exception &)
+		{
+			std::cout << "Cant save file to path: " + path << std::endl;
 		}
 	}
 

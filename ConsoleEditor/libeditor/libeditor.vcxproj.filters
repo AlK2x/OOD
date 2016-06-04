@@ -87,6 +87,9 @@
     <ClInclude Include="DocumentItemFormatter.h">
       <Filter>Source Files\DocumentItem</Filter>
     </ClInclude>
+    <ClInclude Include="DeleteDocumentItemCommand.h">
+      <Filter>Source Files\Command</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -113,9 +116,6 @@
     <ClCompile Include="History.cpp">
       <Filter>Source Files\Document</Filter>
     </ClCompile>
-    <ClCompile Include="Paragraph.cpp">
-      <Filter>Source Files\DocumentItem</Filter>
-    </ClCompile>
     <ClCompile Include="DocumentItemCollection.cpp">
       <Filter>Source Files\DocumentItem</Filter>
     </ClCompile>
@@ -123,6 +123,12 @@
       <Filter>Source Files\Command</Filter>
     </ClCompile>
     <ClCompile Include="DocumentItemFormatter.cpp">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteDocumentItemCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Paragraph.cpp">
       <Filter>Source Files\DocumentItem</Filter>
     </ClCompile>
   </ItemGroup>

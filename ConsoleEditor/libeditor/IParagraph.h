@@ -1,6 +1,9 @@
 #pragma once
 #include <string>
 
+class IParagraph;
+typedef std::shared_ptr<IParagraph> IParagraphPtr;
+
 class IParagraph
 {
 public:

@@ -9,7 +9,11 @@ CInsertDocumentItemCommand::CInsertDocumentItemCommand(CDocumentItemCollection &
 
 void CInsertDocumentItemCommand::DoExecute()
 {
-	m_collection.AddItem(m_item, m_position);
+	bool result = m_collection.AddItem(m_item, m_position);
+	if (!result)
+	{
+		throw std::out_of_range("Item does not exist. Position: " + std::to_string(m_position.get()));
+	}
 }
 
 void CInsertDocumentItemCommand::DoUnexecute()

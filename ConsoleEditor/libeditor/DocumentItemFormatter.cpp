@@ -5,9 +5,10 @@ using boost::format;
 
 CDocumentItemFormatter::CDocumentItemFormatter()
 {
-	m_htmlEntities['<'] = "&lt;";
-	m_htmlEntities['>'] = "&gt;";
-	m_htmlEntities['"'] = "&quot;";
+	m_htmlEntities.push_back({ '&', "&amp;" });
+	m_htmlEntities.push_back({ '<', "&lt;" });
+	m_htmlEntities.push_back({ '>', "&gt;" });
+	m_htmlEntities.push_back({ '"', "&quot;" });
 }
 
 std::string CDocumentItemFormatter::FormatForHtml(CConstDocumentItem const & item)
@@ -15,7 +16,7 @@ std::string CDocumentItemFormatter::FormatForHtml(CConstDocumentItem const & ite
 	return GetFormattedString(
 		item,
 		"<p>%1%</p>",
-		"<img height=\"%1%\" width=\"%2%\" src=\"%3%\" />",
+		R"(<img height="%1%" width="%2%" src="%3%" />)",
 		boost::none,
 		std::bind(&CDocumentItemFormatter::EscapeHtmlEntities, this, std::placeholders::_1)
 	);

@@ -3,6 +3,7 @@
 #include "ChangeStringCommand.h"
 #include "InsertDocumentItemCommand.h"
 #include "DeleteDocumentItemCommand.h"
+#include "DocumentItemFormatter.h"
 
 using namespace std;
 namespace fs = boost::filesystem;
@@ -66,7 +67,21 @@ void CDocument::Save(const std::string & path) const
 		}
 
 		fs::ofstream ofs(path, fs::ofstream::out);
-		ofs << "Hello boost NEW filisystem" + path;
+		
+		CDocumentItemFormatter formatter;
+		ofs << R"(<DOCTYPE>
+<html>
+	<head></head><body>)";
+
+		for (size_t i = 0; i < GetItemsCount(); ++i)
+		{
+			ofs << formatter.FormatForHtml(GetItem(i)) << std::endl;
+		}
+
+		ofs << R"(
+	</body>
+</html>)";
+
 	}
 	catch (const std::exception & ex)
 	{

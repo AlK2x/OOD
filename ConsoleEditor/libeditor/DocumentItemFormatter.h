@@ -1,5 +1,6 @@
 #pragma once
 #include <map>
+#include <vector>
 #include <functional>
 #include "ConstDocumentItem.h"
 
@@ -24,6 +25,7 @@ private:
 		std::function<std::string(std::string&)> escapeFn
 	);
 
-	std::map<char, std::string> m_htmlEntities;
+	//std::map<char, std::string> m_htmlEntities;
+	std::vector < std::pair<char, std::string>> m_htmlEntities;
 };
 

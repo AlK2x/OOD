@@ -28,6 +28,9 @@
     <Filter Include="Source Files\DocumentItem">
       <UniqueIdentifier>{76b24a41-e6f0-4f9c-9170-c1852fce115c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Filesystem">
+      <UniqueIdentifier>{e4e2e62c-f69d-4fa9-9253-02edc9bcff33}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -35,9 +38,6 @@
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Source Files\Menu</Filter>
     </ClInclude>
     <ClInclude Include="ICommand.h">
       <Filter>Source Files\Command</Filter>
@@ -84,10 +84,31 @@
     <ClInclude Include="InsertDocumentItemCommand.h">
       <Filter>Source Files\Command</Filter>
     </ClInclude>
-    <ClInclude Include="DocumentItemFormatter.h">
+    <ClInclude Include="DeleteDocumentItemCommand.h">
+      <Filter>Source Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="HtmlDocumentFormatter.h">
+      <Filter>Source Files\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractDocumentFormatter.h">
+      <Filter>Source Files\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="ListDocumentFormatter.h">
+      <Filter>Source Files\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroCommand.h">
+      <Filter>Source Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageItem.h">
       <Filter>Source Files\DocumentItem</Filter>
     </ClInclude>
-    <ClInclude Include="DeleteDocumentItemCommand.h">
+    <ClInclude Include="TempFolder.h">
+      <Filter>Source Files\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ResizeImageCommand.h">
       <Filter>Source Files\Command</Filter>
     </ClInclude>
   </ItemGroup>
@@ -122,14 +143,32 @@
     <ClCompile Include="InsertDocumentItemCommand.cpp">
       <Filter>Source Files\Command</Filter>
     </ClCompile>
-    <ClCompile Include="DocumentItemFormatter.cpp">
-      <Filter>Source Files\DocumentItem</Filter>
-    </ClCompile>
     <ClCompile Include="DeleteDocumentItemCommand.cpp">
       <Filter>Source Files\Command</Filter>
     </ClCompile>
     <ClCompile Include="Paragraph.cpp">
       <Filter>Source Files\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="HtmlDocumentFormatter.cpp">
+      <Filter>Source Files\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractDocumentFormatter.cpp">
+      <Filter>Source Files\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="ListDocumentFormatter.cpp">
+      <Filter>Source Files\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageItem.cpp">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="TempFolder.cpp">
+      <Filter>Source Files\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ResizeImageCommand.cpp">
+      <Filter>Source Files\Command</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -7,7 +7,7 @@ typedef std::shared_ptr<CDocumentItem> CDocumentItemPtr;
 class CDocumentItem : public CConstDocumentItem
 {
 public:
-	CDocumentItem(std::shared_ptr<IImage> image) : CConstDocumentItem(image) {}
+	CDocumentItem(std::shared_ptr<IImage> m_image) : CConstDocumentItem(m_image) {}
 	CDocumentItem(std::shared_ptr<IParagraph> paragraph) : CConstDocumentItem(paragraph) {}
 	// ¬озвращает указатель на изображение, либо nullptr, если элемент не €вл€етс€ изображением
 	std::shared_ptr<IImage> GetImage();

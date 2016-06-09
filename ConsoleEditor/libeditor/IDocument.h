@@ -10,15 +10,18 @@ class IDocument
 public:
 	// ¬ставл€ет параграф текста в указанную позицию (сдвига€ последующие элементы)
 	// ≈сли параметр position не указан, вставка происходит в конец документа
-	virtual std::shared_ptr<IParagraph> InsertParagraph(const std::string& text,
+	virtual std::shared_ptr<const IParagraph> InsertParagraph(const std::string& text,
 		boost::optional<size_t> position = boost::none) = 0;
 
-	//// ¬ставл€ет изображение в указанную позицию (сдвига€ последующие элементы)
-	//// ѕараметр path задает путь к вставл€емому изображению
-	//// ѕри вставке изображение должно копироватьс€ в подкаталог images 
-	//// под автоматически сгенерированным именем
-	//virtual std::shared_ptr<IImage> InsertImage(const std::string& path, int width, int height,
-	//	boost::optional<size_t> position = boost::none) = 0;
+	virtual std::shared_ptr<const IParagraph> ReplaceParagraph(const std::string& text, size_t position) = 0;
+	// ¬ставл€ет изображение в указанную позицию (сдвига€ последующие элементы)
+	// ѕараметр path задает путь к вставл€емому изображению
+	// ѕри вставке изображение должно копироватьс€ в подкаталог images 
+	// под автоматически сгенерированным именем
+	virtual std::shared_ptr<const IImage> InsertImage(const std::string& path, int width, int height,
+		boost::optional<size_t> position = boost::none) = 0;
+
+	virtual void ResizeImage(int width, int height, size_t position) = 0;
 
 	// ¬озвращает количество элементов в документе
 	virtual size_t GetItemsCount()const = 0;

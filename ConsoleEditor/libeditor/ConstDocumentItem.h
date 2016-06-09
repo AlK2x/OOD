@@ -8,7 +8,7 @@ class CConstDocumentItem
 {
 public:
 	CConstDocumentItem() {}
-	CConstDocumentItem(std::shared_ptr<IImage> image) : m_image(image) {}
+	CConstDocumentItem(std::shared_ptr<IImage> m_image) : m_image(m_image) {}
 	CConstDocumentItem(std::shared_ptr<IParagraph> paragraph) : m_paragraph(paragraph) {}
 	// ¬озвращает указатель на константное изображение, либо nullptr,
 	// если элемент не €вл€етс€ изображением
@@ -17,6 +17,6 @@ public:
 	std::shared_ptr<const IParagraph> GetParagraph()const;
 	virtual ~CConstDocumentItem() = default;
 protected:
-	std::shared_ptr<const IImage> m_image = nullptr;
-	std::shared_ptr<const IParagraph> m_paragraph = nullptr;
+	std::shared_ptr<IImage> m_image = nullptr;
+	std::shared_ptr<IParagraph> m_paragraph = nullptr;
 };

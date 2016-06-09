@@ -1,9 +1,11 @@
 #pragma once
 #include "Menu.h"
 #include "Document.h"
-#include "DocumentItemFormatter.h"
+#include "ListDocumentFormatter.h"
 #include <iostream>
 #include <sstream>
+
+namespace fs = boost::filesystem;
 
 class CEditor
 {
@@ -19,8 +21,10 @@ public:
 		AddMenuItem("redo", "Redo undone command", &CEditor::Redo);
 		AddMenuItem("InsertParagraph", "Insert paragraph. Args: <position>|end <paragraph text>", &CEditor::InsertParagraph);
 		AddMenuItem("ReplaceParagraph", "Replace paragraph. Args: <position> <paragraph text>", &CEditor::ReplaceParagraph);
+		AddMenuItem("InsertImage", "Insert image. Args: <position>|end <width> <height> <file path>", &CEditor::InsertImage);
 		AddMenuItem("DeleteItem", "Delete Item. Args: <position>", &CEditor::DeleteItem);
 		AddMenuItem("Save", "Save the document. Args: <path>", &CEditor::Save);
+		AddMenuItem("ResizeImage", "Resize image: Args: <position> <width> <height>", &CEditor::ReplaceImage);
 	}
 
 	void Start()
@@ -55,11 +59,7 @@ private:
 	void List(std::istream &)
 	{
 		std::cout << "-------------" << std::endl;
-		std::cout << m_document->GetTitle() << std::endl;
-		for (size_t i = 0; i < m_document->GetItemsCount(); ++i)
-		{
-			std::cout << m_formatter.FormatForList(m_document->GetItem(i), i) << std::endl;
-		}
+		m_formatter.FormatDocument(*m_document, std::cout);
 		std::cout << "-------------" << std::endl;
 	}
 
@@ -70,11 +70,11 @@ private:
 		
 		if (error)
 		{
-			ShowErrorMessage();
+			ShowErrorMessage("Invalid arguments. Use help.");
 		}
 		else
 		{
-			std::string paragraphText = ReadText(in);
+			std::string paragraphText = ReadText(in, error);
 			try
 			{
 				m_document->InsertParagraph(paragraphText, position);
@@ -107,30 +107,132 @@ private:
 		}
 	}
 
-	std::string ReadText(std::istream & in)
+	int ReadNumber(std::istream & in, bool & error)
+	{
+		std::string numStr;
+		in >> std::ws >> numStr;
+		std::stringstream ss(numStr);
+		int num;
+		ss >> num;
+		error = ss.fail() || ss.bad();
+		return num;
+	}
+
+	std::string ReadText(std::istream & in, bool & error)
 	{
 		std::string text;
 		getline(in, text);
+		error = in.fail() || in.bad();
 		return text;
 	}
 
-	void ShowErrorMessage()
+	void ShowErrorMessage(std::string msg)
 	{
-		std::cout << "Invalid arguments. Use help." << std::endl;
+		std::cout << msg << std::endl;
 	}
 
 	void ReplaceParagraph(std::istream & in)
 	{
 		bool error = false;
 		boost::optional<size_t> position = ReadPosition(in, error);
-
-		if (error)
+		if (error || position == boost::none)
 		{
-			ShowErrorMessage();
+			ShowErrorMessage("Invalid arguments. Use help.");
+			return;
+		}
+		
+		std::string text = ReadText(in, error);
+
+		if (error || position == boost::none)
+		{
+			ShowErrorMessage("Invalid arguments. Use help.");
 		}
 		else
 		{
-			std::cout << "Not implemented yet!" << std::endl;
+			try
+			{
+				m_document->ReplaceParagraph(text, position.get());
+			}
+			catch (std::out_of_range const & e)
+			{
+				std::cout << e.what() << std::endl;
+			}
+		}
+	}
+
+	void InsertImage(std::istream & in)
+	{
+		bool error = false;
+		boost::optional<size_t> position = ReadPosition(in, error);
+		if (error)
+		{
+			ShowErrorMessage("Incorrect position. Use help.");
+			return;
+		}
+
+		int width = ReadNumber(in, error);
+		if (error)
+		{
+			ShowErrorMessage("Incorrect width parameter. Use help.");
+			return;
+		}
+
+		int height = ReadNumber(in, error);
+		if (error)
+		{
+			ShowErrorMessage("Incorrect height parameter. Use help.");
+			return;
+		}
+
+		in >> std::ws;
+		std::string path = ReadText(in, error);
+		if (error)
+		{
+			ShowErrorMessage("Cant read path parameter. Use help.");
+			return;
+		}
+
+		try
+		{
+			m_document->InsertImage(path, width, height, position);
+		}
+		catch (std::exception const & e)
+		{
+			std::cout << e.what() << std::endl;
+		}
+	}
+
+	void ReplaceImage(std::istream & in)
+	{
+		bool error = false;
+		boost::optional<size_t> position = ReadPosition(in, error);
+		if (error || position == boost::none)
+		{
+			ShowErrorMessage("Incorrect position. Use help.");
+			return;
+		}
+
+		int width = ReadNumber(in, error);
+		if (error)
+		{
+			ShowErrorMessage("Incorrect width parameter. Use help.");
+			return;
+		}
+
+		int height = ReadNumber(in, error);
+		if (error)
+		{
+			ShowErrorMessage("Incorrect height parameter. Use help.");
+			return;
+		}
+
+		try
+		{
+			m_document->ResizeImage(width, height, position.get());
+		}
+		catch (std::exception const & e)
+		{
+			std::cout << e.what() << std::endl;
 		}
 	}
 
@@ -141,7 +243,7 @@ private:
 
 		if (error || position == boost::none)
 		{
-			ShowErrorMessage();
+			ShowErrorMessage("Invalid arguments. Use help.");
 			return;
 		}
 		
@@ -158,15 +260,17 @@ private:
 
 	void Save(std::istream & in)
 	{
+		bool error = false;
 		in >> std::ws;
-		std::string path = ReadText(in);
+		std::string path = ReadText(in, error);
 		try
 		{
 			m_document->Save(path);
 		}
-		catch (const std::exception &)
+		catch (const std::exception & e)
 		{
 			std::cout << "Cant save file to path: " + path << std::endl;
+			std::cout << e.what() << std::endl;
 		}
 	}
 
@@ -195,6 +299,6 @@ private:
 	}
 
 	CMenu m_menu;
-	CDocumentItemFormatter m_formatter;
 	std::unique_ptr<IDocument> m_document;
+	CListDocumentFormatter m_formatter;
 };

@@ -6,7 +6,7 @@
 #include "../libeditor/Menu.h"
 
 int main()
-{
+	{
 	CEditor editor;
 	editor.Start();
 	return 0;

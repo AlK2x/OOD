@@ -37,8 +37,6 @@ std::string CAbstractDocumentFormatter::GetFormattedString(
 			fmt % position.get();
 		}
 
-		std::cout << imagePtr->GetPath() << std::endl;
-
 		return fmt.str();
 	}
 

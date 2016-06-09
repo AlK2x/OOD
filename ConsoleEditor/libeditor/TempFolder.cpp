@@ -10,7 +10,6 @@ CTempFolder::CTempFolder()
 	fs::create_directory(m_path);
 	fs::path m_imagePath(m_path);
 	m_imagePath /= m_relativeImagePath;
-	std::cout << m_imagePath << std::endl;
 	fs::create_directory(m_imagePath);
 }
 

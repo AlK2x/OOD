@@ -102,8 +102,6 @@ void CDocument::Save(const std::string & path) const
 				fs::copy_file(from, absoluteImagePath, fs::copy_option::overwrite_if_exists);
 			}
 		}
-
-		
 		
 		fs::ofstream ofs(path, fs::ofstream::out);
 		

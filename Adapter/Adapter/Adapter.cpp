@@ -1,11 +1,11 @@
-#include "stdafx.h"
+п»ї#include "stdafx.h"
 
 using namespace std;
 
-// Пространство имен графической библиотеки (недоступно для изменения)
+// РџСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РёРјРµРЅ РіСЂР°С„РёС‡РµСЃРєРѕР№ Р±РёР±Р»РёРѕС‚РµРєРё (РЅРµРґРѕСЃС‚СѓРїРЅРѕ РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ)
 namespace graphics_lib
 {
-	// Холст для рисования
+	// РҐРѕР»СЃС‚ РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ
 	class ICanvas
 	{
 	public:
@@ -14,7 +14,7 @@ namespace graphics_lib
 		virtual ~ICanvas() = default;
 	};
 
-	// Реализация холста для рисования
+	// Р РµР°Р»РёР·Р°С†РёСЏ С…РѕР»СЃС‚Р° РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ
 	class CCanvas : public ICanvas
 	{
 	public:
@@ -29,8 +29,8 @@ namespace graphics_lib
 	};
 }
 
-// Пространство имен библиотеки для рисования фигур (использует graphics_lib)
-// Код библиотеки недоступен для изменения
+// РџСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РёРјРµРЅ Р±РёР±Р»РёРѕС‚РµРєРё РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ С„РёРіСѓСЂ (РёСЃРїРѕР»СЊР·СѓРµС‚ graphics_lib)
+// РљРѕРґ Р±РёР±Р»РёРѕС‚РµРєРё РЅРµРґРѕСЃС‚СѓРїРµРЅ РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ
 namespace shape_drawing_lib
 {
 	struct Point
@@ -39,7 +39,7 @@ namespace shape_drawing_lib
 		int y;
 	};
 
-	// Интерфейс объектов, которые могут быть нарисованы на холсте из graphics_lib
+	// РРЅС‚РµСЂС„РµР№СЃ РѕР±СЉРµРєС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ РјРѕРіСѓС‚ Р±С‹С‚СЊ РЅР°СЂРёСЃРѕРІР°РЅС‹ РЅР° С…РѕР»СЃС‚Рµ РёР· graphics_lib
 	class ICanvasDrawable
 	{
 	public:
@@ -60,6 +60,7 @@ namespace shape_drawing_lib
 			canvas.MoveTo(m_p1.x, m_p1.y);
 			canvas.LineTo(m_p2.x, m_p2.y);
 			canvas.LineTo(m_p3.x, m_p3.y);
+			canvas.LineTo(m_p1.x, m_p1.y);
 		}
 	private:
 		const Point & m_p1;
@@ -89,7 +90,7 @@ namespace shape_drawing_lib
 		int m_height;
 	};
 
-	// Художник, способный рисовать ICanvasDrawable-объекты на ICanvas
+	// РҐСѓРґРѕР¶РЅРёРє, СЃРїРѕСЃРѕР±РЅС‹Р№ СЂРёСЃРѕРІР°С‚СЊ ICanvasDrawable-РѕР±СЉРµРєС‚С‹ РЅР° ICanvas
 	class CCanvasPainter
 	{
 	public:
@@ -106,7 +107,7 @@ namespace shape_drawing_lib
 	};
 }
 
-// Пространство имен современной графической библиотеки (недоступно для изменения)
+// РџСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РёРјРµРЅ СЃРѕРІСЂРµРјРµРЅРЅРѕР№ РіСЂР°С„РёС‡РµСЃРєРѕР№ Р±РёР±Р»РёРѕС‚РµРєРё (РЅРµРґРѕСЃС‚СѓРїРЅРѕ РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ)
 namespace modern_graphics_lib
 {
 	class CPoint
@@ -118,7 +119,7 @@ namespace modern_graphics_lib
 		int y;
 	};
 
-	// Класс для современного рисования графики
+	// РљР»Р°СЃСЃ РґР»СЏ СЃРѕРІСЂРµРјРµРЅРЅРѕРіРѕ СЂРёСЃРѕРІР°РЅРёСЏ РіСЂР°С„РёРєРё
 	class CModernGraphicsRenderer
 	{
 	public:
@@ -128,13 +129,13 @@ namespace modern_graphics_lib
 
 		~CModernGraphicsRenderer()
 		{
-			if (m_drawing) // Завершаем рисование, если оно было начато
+			if (m_drawing) // Р—Р°РІРµСЂС€Р°РµРј СЂРёСЃРѕРІР°РЅРёРµ, РµСЃР»Рё РѕРЅРѕ Р±С‹Р»Рѕ РЅР°С‡Р°С‚Рѕ
 			{
 				EndDraw();
 			}
 		}
 
-		// Этот метод должен быть вызван в начале рисования
+		// Р­С‚РѕС‚ РјРµС‚РѕРґ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РІС‹Р·РІР°РЅ РІ РЅР°С‡Р°Р»Рµ СЂРёСЃРѕРІР°РЅРёСЏ
 		void BeginDraw()
 		{
 			if (m_drawing)
@@ -145,17 +146,24 @@ namespace modern_graphics_lib
 			m_drawing = true;
 		}
 
-		// Выполняет рисование линии
+		// Р’С‹РїРѕР»РЅСЏРµС‚ СЂРёСЃРѕРІР°РЅРёРµ Р»РёРЅРёРё
 		void DrawLine(const CPoint & start, const CPoint & end)
 		{
 			if (!m_drawing)
 			{
 				throw logic_error("DrawLine is allowed between BeginDraw()/EndDraw() only");
 			}
-			m_out << boost::format(R"(  <line fromX="%1%" fromY="%2" toX="%3%" toY="%4%"/>)") << endl;
+			try
+			{
+				m_out << boost::format(R"(  <line fromX="%1%" fromY="%2%" toX="%3%" toY="%4%"/>)") % start.x % start.y % end.x % end.y << endl;
+			}
+			catch (const std::exception & e)
+			{
+				cout << e.what() << endl;
+			}
 		}
 
-		// Этот метод должен быть вызван в конце рисования
+		// Р­С‚РѕС‚ РјРµС‚РѕРґ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РІС‹Р·РІР°РЅ РІ РєРѕРЅС†Рµ СЂРёСЃРѕРІР°РЅРёСЏ
 		void EndDraw()
 		{
 			if (!m_drawing)
@@ -171,9 +179,35 @@ namespace modern_graphics_lib
 	};
 }
 
-// Пространство имен приложения (доступно для модификации)
+// РџСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РёРјРµРЅ РїСЂРёР»РѕР¶РµРЅРёСЏ (РґРѕСЃС‚СѓРїРЅРѕ РґР»СЏ РјРѕРґРёС„РёРєР°С†РёРё)
 namespace app
 {
+	class CModernGraphicLibToCanvasAdapter : public graphics_lib::ICanvas
+	{
+	public:
+		CModernGraphicLibToCanvasAdapter(modern_graphics_lib::CModernGraphicsRenderer & renderer) :m_renderer(renderer) {}
+
+		void MoveTo(int x, int y) override
+		{
+			m_offsetX = x;
+			m_offsetY = y;
+		}
+		void LineTo(int x, int y) override
+		{
+			m_renderer.BeginDraw();
+			m_renderer.DrawLine(modern_graphics_lib::CPoint(m_offsetX, m_offsetY), modern_graphics_lib::CPoint(x, y));
+			m_renderer.EndDraw();
+			m_offsetX = x;
+			m_offsetY = y;
+		}
+
+		~CModernGraphicLibToCanvasAdapter() = default;
+	private:
+		modern_graphics_lib::CModernGraphicsRenderer & m_renderer;
+		int m_offsetX;
+		int m_offsetY;
+	};
+
 	void PaintPicture(shape_drawing_lib::CCanvasPainter & painter)
 	{
 		using namespace shape_drawing_lib;
@@ -195,28 +229,26 @@ namespace app
 	void PaintPictureOnModernGraphicsRenderer()
 	{
 		modern_graphics_lib::CModernGraphicsRenderer renderer(cout);
-		(void)&renderer; // устраняем предупреждение о неиспользуемой переменной
-
-						 // TODO: при помощи существующей функции PaintPicture() нарисовать
-						 // картину на renderer
-						 // Подсказка: используйте паттерн "Адаптер"
+		CModernGraphicLibToCanvasAdapter adapter(renderer);
+		shape_drawing_lib::CCanvasPainter painter(adapter);
+		PaintPicture(painter);
 	}
 }
 
 namespace graphics_lib_pro
 {
-	// Холст для рисования
+	// РҐРѕР»СЃС‚ РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ
 	class ICanvas
 	{
 	public:
-		// Установка цвета в формате 0xRRGGBB
+		// РЈСЃС‚Р°РЅРѕРІРєР° С†РІРµС‚Р° РІ С„РѕСЂРјР°С‚Рµ 0xRRGGBB
 		virtual void SetColor(uint32_t rgbColor) = 0;
 		virtual void MoveTo(int x, int y) = 0;
 		virtual void LineTo(int x, int y) = 0;
 		virtual ~ICanvas() = default;
 	};
 
-	// Реализация холста для рисования
+	// Р РµР°Р»РёР·Р°С†РёСЏ С…РѕР»СЃС‚Р° РґР»СЏ СЂРёСЃРѕРІР°РЅРёСЏ
 	class CCanvas : public ICanvas
 	{
 	public:
@@ -235,7 +267,7 @@ namespace graphics_lib_pro
 	};
 }
 
-// Пространство имен обновленной современной графической библиотеки (недоступно для изменения)
+// РџСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РёРјРµРЅ РѕР±РЅРѕРІР»РµРЅРЅРѕР№ СЃРѕРІСЂРµРјРµРЅРЅРѕР№ РіСЂР°С„РёС‡РµСЃРєРѕР№ Р±РёР±Р»РёРѕС‚РµРєРё (РЅРµРґРѕСЃС‚СѓРїРЅРѕ РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ)
 namespace modern_graphics_lib_pro
 {
 	class CPoint
@@ -247,7 +279,7 @@ namespace modern_graphics_lib_pro
 		int y;
 	};
 
-	// Цвет в формате RGBA, каждый компонент принимает значения от 0.0f до 1.0f
+	// Р¦РІРµС‚ РІ С„РѕСЂРјР°С‚Рµ RGBA, РєР°Р¶РґС‹Р№ РєРѕРјРїРѕРЅРµРЅС‚ РїСЂРёРЅРёРјР°РµС‚ Р·РЅР°С‡РµРЅРёСЏ РѕС‚ 0.0f РґРѕ 1.0f
 	class CRGBAColor
 	{
 	public:
@@ -255,7 +287,7 @@ namespace modern_graphics_lib_pro
 		float r, g, b, a;
 	};
 
-	// Класс для современного рисования графики
+	// РљР»Р°СЃСЃ РґР»СЏ СЃРѕРІСЂРµРјРµРЅРЅРѕРіРѕ СЂРёСЃРѕРІР°РЅРёСЏ РіСЂР°С„РёРєРё
 	class CModernGraphicsRenderer
 	{
 	public:
@@ -271,7 +303,7 @@ namespace modern_graphics_lib_pro
 			}
 		}
 
-		// Этот метод должен быть вызван в начале рисования
+		// Р­С‚РѕС‚ РјРµС‚РѕРґ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РІС‹Р·РІР°РЅ РІ РЅР°С‡Р°Р»Рµ СЂРёСЃРѕРІР°РЅРёСЏ
 		void BeginDraw()
 		{
 			if (m_drawing)
@@ -282,7 +314,7 @@ namespace modern_graphics_lib_pro
 			m_drawing = true;
 		}
 
-		// Выполняет рисование линии
+		// Р’С‹РїРѕР»РЅСЏРµС‚ СЂРёСЃРѕРІР°РЅРёРµ Р»РёРЅРёРё
 		void DrawLine(const CPoint & start, const CPoint & end, const CRGBAColor& color)
 		{
 			m_out << (boost::format(R"(
@@ -290,14 +322,9 @@ namespace modern_graphics_lib_pro
 	<color r="%5%" g="%6%" b="%7%" a="%8%" />
  </line>
 )") % start.x % start.y % end.x % end.y % color.r % color.g % color.b % color.a) << std::endl;
-			// TODO: выводит в output инструкцию для рисования линии в виде
-			// <line fromX="3" fromY="5" toX="5" toY="17">
-			//   <color r="0.35" g="0.47" b="1.0" a="1.0" />
-			// </line>
-			// Можно вызывать только между BeginDraw() и EndDraw()
 		}
 
-		// Этот метод должен быть вызван в конце рисования
+		// Р­С‚РѕС‚ РјРµС‚РѕРґ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РІС‹Р·РІР°РЅ РІ РєРѕРЅС†Рµ СЂРёСЃРѕРІР°РЅРёСЏ
 		void EndDraw()
 		{
 			if (!m_drawing)

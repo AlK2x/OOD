@@ -76,8 +76,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <ExecutablePath>C:\SDK\boost_1_57_0;$(ExecutablePath)</ExecutablePath>
-    <LibraryPath>C:\SDK\boost_1_57_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>C:\SDK\boost;$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>C:\SDK\boost\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -108,7 +108,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\SDK\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDK\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ExceptionHandling>Async</ExceptionHandling>
     </ClCompile>
     <Link>
@@ -167,6 +167,7 @@
     <ClInclude Include="..\WeatherStation\StatsDisplay.h" />
     <ClInclude Include="..\WeatherStation\WeatherData.h" />
     <ClInclude Include="..\WeatherStation\WeatherInfo.h" />
+    <ClInclude Include="..\WeatherStation\WindSensorStatistic.h" />
     <ClInclude Include="DummyObservable.h" />
     <ClInclude Include="DummyObserver.h" />
     <ClInclude Include="stdafx.h" />
@@ -175,10 +176,10 @@
   <ItemGroup>
     <ClCompile Include="..\WeatherStation\BadWeatherData.cpp" />
     <ClCompile Include="..\WeatherStation\Display.cpp" />
-    <ClCompile Include="..\WeatherStation\Observable.cpp" />
     <ClCompile Include="..\WeatherStation\SensorStatistic.cpp" />
     <ClCompile Include="..\WeatherStation\StatsDisplay.cpp" />
     <ClCompile Include="..\WeatherStation\WeatherData.cpp" />
+    <ClCompile Include="..\WeatherStation\WindSensorStatistic.cpp" />
     <ClCompile Include="DummyObservable.cpp" />
     <ClCompile Include="DummyObserver.cpp" />
     <ClCompile Include="stdafx.cpp">

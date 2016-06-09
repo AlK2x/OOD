@@ -1,5 +1,8 @@
 #pragma once
-#include "stdafx.h"
+#include "WeatherInfo.h"
+
+template <class T>
+class IObservable;
 /*
 Шаблонный интерфейс IObserver. Его должен реализовывать класс,
 желающий получать уведомления от соответствующего IObservable
@@ -10,6 +13,6 @@ template <typename T>
 class IObserver
 {
 public:
-	virtual void Update(T const& data) = 0;
+	virtual void Update(IObservable<T> const& subject) = 0;
 	virtual ~IObserver() = default;
 };

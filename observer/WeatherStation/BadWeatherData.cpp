@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "BadWeatherData.h"
 
-CBadWeatherData::CBadWeatherData(IObservable<SWeatherInfo>& wd)
+CBadWeatherData::CBadWeatherData(IObservable<SWeatherInfo>&& wd)
 	:m_wd(wd)
 {
 }

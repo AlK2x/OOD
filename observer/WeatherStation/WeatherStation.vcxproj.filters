@@ -57,6 +57,9 @@
     <ClInclude Include="SensorStatistic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WindSensorStatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -78,6 +81,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SensorStatistic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WindSensorStatistic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

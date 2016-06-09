@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include "IObservable.h"
 #include "IObserver.h"
 #include "WeatherInfo.h"
@@ -19,7 +18,6 @@ class CObservable : public IObservable<T>
 public:
 	typedef IObserver<T> ObserverType;
 
-	
 	struct ComparableTypeEx
 	{
 		ObserverType* obs;
@@ -58,12 +56,11 @@ void CObservable<T>::RegisterObserver(ObserverType & observer, unsigned priority
 template<class T>
 void CObservable<T>::NotifyObservers()
 {
-	T data = GetChangedData();
 	auto observers = m_multiObservers;
 	auto &iter = observers.get<1>();
 	for (auto it = iter.begin(); it != iter.end(); ++it)
 	{
-		it->obs->Update(data);
+		it->obs->Update(*this);
 	}
 }
 

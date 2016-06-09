@@ -25,18 +25,6 @@ private:
 	std::streambuf * old;
 };
 
-BOOST_AUTO_TEST_CASE(TestSelfDelete)
-{
-	CWeatherData wd;
-	CBadWeatherData bwd(wd);
-	wd.RegisterObserver(bwd);
-
-	wd.SetMeasurements(1, 2, 4);
-	wd.SetMeasurements(3, 4, 5);
-
-	BOOST_CHECK(true);
-}
-
 BOOST_AUTO_TEST_CASE(TestChangeObservsOrder)
 {
 	CDummyObservable dummyData;
@@ -56,11 +44,40 @@ BOOST_AUTO_TEST_CASE(TestChangeObservsOrder)
 	BOOST_CHECK(output.is_equal("2\n1\n"));
 }
 
-BOOST_AUTO_TEST_CASE(TestIndoorOutdoorSensor)
+BOOST_AUTO_TEST_CASE(WindBlowTwoTimesNorthOneSouth)
 {
-	CWeatherData indoor;
-	indoor.SetWeatherDataType(WeatherDataType::INDOOR);
-	CWeatherData outdoor;
+	CWindSensorStatistic s;
+	s.Update(1, 90);
+	s.Update(1, 90);
+	s.Update(1, 270);
+	BOOST_CHECK_CLOSE(s.GetAverage(), 90, 1e-5);
+}
+
+BOOST_AUTO_TEST_CASE(WindBlowTwoTimesSouthhOneNorth)
+{
+	CWindSensorStatistic s;
+	s.Update(1, 270);
+	s.Update(1, 270);
+	s.Update(1, 90);
+	BOOST_CHECK_CLOSE(s.GetAverage(), 270, 1e-5);
+}
+
+BOOST_AUTO_TEST_CASE(WindBlowTwoTimesWestOneEast)
+{
+	CWindSensorStatistic s;
+	s.Update(1, 180);
+	s.Update(1, 180);
+	s.Update(1, 0);
+	BOOST_CHECK_CLOSE(s.GetAverage(), 180, 1e-5);
+}
+
+BOOST_AUTO_TEST_CASE(WindBlowTwoTimesEastOneWest)
+{
+	CWindSensorStatistic s;
+	s.Update(1, 0);
+	s.Update(1, 0);
+	s.Update(1, 180);
+	BOOST_CHECK_CLOSE(s.GetAverage(), 0.0, 1e-5);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -29,8 +29,8 @@ std::string CAbstractDocumentFormatter::GetFormattedString(
 	{
 		
 		format fmt(imagePattern);
-		fmt % imagePtr->GetHeight();
 		fmt % imagePtr->GetWidth();
+		fmt % imagePtr->GetHeight();
 		fmt % imagePtr->GetPath().string();
 		if (position)
 		{

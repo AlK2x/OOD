@@ -11,6 +11,7 @@ public:
 	virtual ~CAbstractDocumentFormatter() = default;
 
 protected:
+
 	virtual std::string FormatDocumentItem(CConstDocumentItem const & item, size_t position) = 0;
 
 	std::string GetFormattedString(

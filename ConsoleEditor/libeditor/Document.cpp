@@ -57,6 +57,17 @@ CConstDocumentItem CDocument::GetItem(size_t index) const
 	return *item.get();
 }
 
+CDocumentItem CDocument::GetItem(size_t index)
+{
+	CDocumentItemPtr item = m_items.GetItem(index);
+	if (item == nullptr)
+	{
+		throw std::out_of_range("Element does not exist.");
+	}
+
+	return *item.get();
+}
+
 size_t CDocument::GetItemsCount() const
 {
 	return m_items.GetSize();
@@ -114,17 +125,6 @@ void CDocument::Save(const std::string & path) const
 	}
 }
 
-void CDocument::ResizeImage(int width, int height, size_t position)
-{
-	CDocumentItemPtr item = m_items.GetItem(position);
-	if (item == nullptr || item->GetImage() == nullptr)
-	{
-		throw std::out_of_range("Element does not exist.");
-	}
-
-	m_history.AddAndExecuteCommand(std::make_unique<CResizeImageCommand>(item->GetImage(), width, height));
-}
-
 std::shared_ptr<const IImage> CDocument::InsertImage(const std::string & path, int width, int height, boost::optional<size_t> position)
 {
 	fs::path sourcePath(path);
@@ -142,7 +142,7 @@ std::shared_ptr<const IImage> CDocument::InsertImage(const std::string & path, i
 
 	fs::copy_file(sourcePath, tempFilePath, fs::copy_option::overwrite_if_exists);
 
-	IImagePtr m_image = std::make_shared<CImageItem>(tempFilePath, relativeImagePath, width, height);
+	IImagePtr m_image = std::make_shared<CImageItem>(m_history, tempFilePath, relativeImagePath, width, height);
 	CDocumentItemPtr item = std::make_shared<CDocumentItem>(m_image);
 	
 	m_history.AddAndExecuteCommand(std::make_unique<CInsertDocumentItemCommand>(m_items, item, position));
@@ -161,45 +161,12 @@ void CDocument::DeleteItem(size_t index)
 	m_history.AddAndExecuteCommand(std::make_unique<CDeleteDocumentItemCommand>(m_items, item, index));
 }
 
-//CDocumentItem CDocument::GetItem(size_t index)
-//{
-//	CDocumentItemPtr item = m_items.GetItem(index);
-//	if (item == nullptr)
-//	{
-//		throw std::out_of_range("Element does not exist. Index: " + index);
-//	}
-//
-//	return *item.get();
-//}
-
 std::shared_ptr<const IParagraph> CDocument::InsertParagraph(const std::string & text, boost::optional<size_t> position)
 {
-	IParagraphPtr paragraph = std::make_shared<CParagraph>();
-	paragraph->SetText(text);
+	IParagraphPtr paragraph = std::make_shared<CParagraph>(m_history, text);
 	CDocumentItemPtr item = std::make_shared<CDocumentItem>(paragraph);
 
 	m_history.AddAndExecuteCommand(std::make_unique<CInsertDocumentItemCommand>(m_items, item, position));
 	return paragraph;
 }
 
-std::shared_ptr<const IParagraph> CDocument::ReplaceParagraph(const std::string & text, size_t position)
-{
-	CDocumentItemPtr item = m_items.GetItem(position);
-	if (item == nullptr)
-	{
-		throw std::out_of_range("Element does not exist.");
-	}
-
-	std::unique_ptr<CMacroCommand> command = std::make_unique<CMacroCommand>();
-
-	IParagraphPtr paragraph = std::make_shared<CParagraph>();
-	paragraph->SetText(text);
-	CDocumentItemPtr newItem = std::make_shared<CDocumentItem>(paragraph);
-
-	command->AddCommand(std::make_unique<CDeleteDocumentItemCommand>(m_items, item, position));
-	command->AddCommand(std::make_unique<CInsertDocumentItemCommand>(m_items, newItem, position));
-
-	m_history.AddAndExecuteCommand(std::move(command));
-
-	return paragraph;
-}

@@ -11,13 +11,14 @@ CHtmlDocumentFormatter::CHtmlDocumentFormatter()
 
 void CHtmlDocumentFormatter::FormatDocument(IDocument const & document, std::ostream & out)
 {
+	std::string escapedTitle = EscapeHtmlEntities(document.GetTitle());
 	out << boost::format{ R"(
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>%1%</title>
 	</head>
-	<body>)" } % document.GetTitle();
+	<body>)" } % escapedTitle;
 
 	for (size_t i = 0; i < document.GetItemsCount(); ++i)
 	{
@@ -29,7 +30,7 @@ void CHtmlDocumentFormatter::FormatDocument(IDocument const & document, std::ost
 </html>)";
 }
 
-std::string CHtmlDocumentFormatter::EscapeHtmlEntities(std::string & str)
+std::string CHtmlDocumentFormatter::EscapeHtmlEntities(const std::string & str)
 {
 	std::string escaped = str;
 	for (auto const & htmlEntity : m_htmlEntities)

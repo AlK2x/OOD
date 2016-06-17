@@ -1,25 +1,19 @@
 #include "stdafx.h"
 #include "ResizeImageCommand.h"
 
-CResizeImageCommand::CResizeImageCommand(IImagePtr image, int width, int height)
-	:m_image(image), m_width(width), m_height(height)
+CResizeImageCommand::CResizeImageCommand(int & width, int & height, int newWidth, int newHight)
+	:m_width(width), m_height(height), m_newHeight(newHight), m_newWidth(newWidth)
 {
 }
 
 void CResizeImageCommand::DoExecute()
 {
-	int tempHeight = m_image->GetHeight();
-	int tempWidth = m_image->GetWidth();
-	std::swap(tempHeight, m_height);
-	std::swap(tempWidth, m_width);
-	m_image->Resize(tempWidth, tempHeight);
+	std::swap(m_newHeight, m_height);
+	std::swap(m_newWidth, m_width);
 }
 
 void CResizeImageCommand::DoUnexecute()
 {
-	int tempHeight = m_image->GetHeight();
-	int tempWidth = m_image->GetWidth();
-	std::swap(tempHeight, m_height);
-	std::swap(tempWidth, m_width);
-	m_image->Resize(tempWidth, tempHeight);
+	std::swap(m_newHeight, m_height);
+	std::swap(m_newWidth, m_width);
 }

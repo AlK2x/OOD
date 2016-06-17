@@ -12,7 +12,7 @@ protected:
 	std::string FormatDocumentItem(CConstDocumentItem const & item, size_t position) override;
 
 private:
-	std::string EscapeHtmlEntities(std::string & str);
+	std::string EscapeHtmlEntities(const std::string & str);
 
 	std::vector < std::pair<char, std::string>> m_htmlEntities;
 };

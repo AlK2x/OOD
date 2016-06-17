@@ -2,11 +2,12 @@
 #include "IImage.h"
 #include "TempFolder.h"
 #include "TempFolder.h"
+#include "History.h"
 
 class CImageItem : public IImage
 {
 public:
-	CImageItem(boost::filesystem::path tempFilePath, boost::filesystem::path relativePathToImage, int width, int height);
+	CImageItem(CHistory & m_history, boost::filesystem::path tempFilePath, boost::filesystem::path relativePathToImage, int width, int height);
 
 	~CImageItem();
 
@@ -19,6 +20,7 @@ public:
 private:
 	int m_width;
 	int m_height;
+	CHistory & m_history;
 
 	boost::filesystem::path m_imageRelativePath;
 	boost::filesystem::path m_pathToTempImage;

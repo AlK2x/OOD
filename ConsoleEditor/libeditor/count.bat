@@ -1,7 +1,7 @@
 @echo off
 setlocal
 if not [%1]==[] pushd %1
-for /r %%F in (*.h) do call :sub "%%F"
+for /r %%F in (*.cpp *.h) do call :sub "%%F"
 echo Total lines in %Files% files: %Total%
 popd
 exit /b 0

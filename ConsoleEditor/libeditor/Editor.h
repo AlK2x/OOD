@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "Document.h"
 #include "ListDocumentFormatter.h"
+#include "ResizeImageCommand.h"
 #include <iostream>
 #include <sstream>
 
@@ -151,7 +152,12 @@ private:
 		{
 			try
 			{
-				m_document->ReplaceParagraph(text, position.get());
+				CDocumentItem item = m_document->GetItem(position.get());
+				if (item.GetParagraph() == nullptr)
+				{
+					throw new std::runtime_error("It's not a paragraph");
+				}
+				item.GetParagraph()->SetText(text);
 			}
 			catch (std::out_of_range const & e)
 			{
@@ -228,7 +234,12 @@ private:
 
 		try
 		{
-			m_document->ResizeImage(width, height, position.get());
+			CDocumentItem item = m_document->GetItem(position.get());
+			if (item.GetImage() == nullptr)
+			{
+				throw new std::runtime_error("Not image document item");
+			}
+			item.GetImage()->Resize(width, height);
 		}
 		catch (std::exception const & e)
 		{

@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "ImageItem.h"
+#include "ResizeImageCommand.h"
 
 namespace fs = boost::filesystem;
 
-CImageItem::CImageItem(	boost::filesystem::path tempFilePath, boost::filesystem::path relativePathToImage, int width, int height)
-	:m_width(width), m_height(height), m_imageRelativePath(relativePathToImage), m_pathToTempImage(tempFilePath)
+CImageItem::CImageItem(CHistory & history, boost::filesystem::path tempFilePath, boost::filesystem::path relativePathToImage, int width, int height)
+	:m_history(history), m_width(width), m_height(height), m_imageRelativePath(relativePathToImage), m_pathToTempImage(tempFilePath)
 {
 }
 
@@ -35,6 +36,5 @@ int CImageItem::GetHeight() const
 
 void CImageItem::Resize(int width, int height)
 {
-	m_width = width;
-	m_height = height;
+	m_history.AddAndExecuteCommand(std::make_unique<CResizeImageCommand>(m_width, m_height, width, height));
 }

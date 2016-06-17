@@ -185,7 +185,10 @@ namespace app
 	class CModernGraphicLibToCanvasAdapter : public graphics_lib::ICanvas
 	{
 	public:
-		CModernGraphicLibToCanvasAdapter(modern_graphics_lib::CModernGraphicsRenderer & renderer) :m_renderer(renderer) {}
+		CModernGraphicLibToCanvasAdapter(modern_graphics_lib::CModernGraphicsRenderer & renderer) :m_renderer(renderer) 
+		{
+			m_renderer.BeginDraw();
+		}
 
 		void MoveTo(int x, int y) override
 		{
@@ -194,14 +197,15 @@ namespace app
 		}
 		void LineTo(int x, int y) override
 		{
-			m_renderer.BeginDraw();
 			m_renderer.DrawLine(modern_graphics_lib::CPoint(m_offsetX, m_offsetY), modern_graphics_lib::CPoint(x, y));
-			m_renderer.EndDraw();
 			m_offsetX = x;
 			m_offsetY = y;
 		}
 
-		~CModernGraphicLibToCanvasAdapter() = default;
+		~CModernGraphicLibToCanvasAdapter()
+		{
+			m_renderer.EndDraw();
+		}
 	private:
 		modern_graphics_lib::CModernGraphicsRenderer & m_renderer;
 		int m_offsetX;

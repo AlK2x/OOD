@@ -59,9 +59,7 @@ private:
 
 	void List(std::istream &)
 	{
-		std::cout << "-------------" << std::endl;
 		m_formatter.FormatDocument(*m_document, std::cout);
-		std::cout << "-------------" << std::endl;
 	}
 
 	void InsertParagraph(std::istream & in)

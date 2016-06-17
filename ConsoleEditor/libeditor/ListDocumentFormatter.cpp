@@ -1,27 +1,42 @@
 #include "stdafx.h"
 #include "ListDocumentFormatter.h"
 
-void CListDocumentFormatter::FormatDocument(IDocument const & document, std::ostream & out)
+namespace fs = boost::filesystem;
+
+void CListDocumentFormatter::FormatHeader(IDocument const & document, std::ostream & out)
 {
+	out << "-------------" << std::endl;
 	out << "Title: " << document.GetTitle() << std::endl;
-	for (size_t i = 0; i < document.GetItemsCount(); ++i)
+}
+
+void CListDocumentFormatter::FormatDocumentItem(CConstDocumentItem const & item, size_t position, std::ostream & out)
+{
+	std::shared_ptr<const IImage> imagePtr = item.GetImage();
+	std::shared_ptr<const IParagraph> paragraphPtr = item.GetParagraph();
+
+	if (paragraphPtr != nullptr)
 	{
-		out << FormatDocumentItem(document.GetItem(i), i) << std::endl;
+		out << boost::format(R"(%1%. Paragraph: %2%)") % position % paragraphPtr->GetText() << std::endl;
+	}
+
+	if (imagePtr != nullptr)
+	{
+		out << boost::format(R"(%1%. Image: %2% %3% %4%)") 
+			% position 
+			% imagePtr->GetWidth() 
+			% imagePtr->GetHeight()
+			% imagePtr->GetPath().string()
+			<< std::endl;
 	}
 }
 
-std::string CListDocumentFormatter::FormatDocumentItem(CConstDocumentItem const & item, size_t position)
+void CListDocumentFormatter::FormatFooter(std::ostream & out)
 {
-	return GetFormattedString(
-		item,
-		"%2%. Paragraph: %1%",
-		"%4%. Image: %1% %2% %3%",
-		position,
-		std::bind(&CListDocumentFormatter::NoEscape, this, std::placeholders::_1)
-	);
+	out << "-------------" << std::endl;
 }
 
-std::string CListDocumentFormatter::NoEscape(std::string & str)
+void CListDocumentFormatter::CreateDocumentFilesImpl(IDocument const & document, std::string const & path)
 {
-	return str;
+	(void)document;
+	(void)path;
 }

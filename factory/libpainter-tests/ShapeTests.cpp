@@ -10,7 +10,7 @@ public:
 		_color = color;
 	}
 
-	virtual void DrawLine(int from, int to) override
+	virtual void DrawLine(SPoint from, SPoint to) override
 	{
 		(void)from;
 		(void)to;

@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\SDK\boost;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SDK\boost\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\SDK\SDL\include;C:\SDK\boost;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\SDK\SDL\lib\x86;C:\SDK\boost\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ExecutablePath>C:\SDK\boost;$(ExecutablePath)</ExecutablePath>
@@ -85,6 +85,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>C:\SDK\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

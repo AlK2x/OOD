@@ -3,16 +3,10 @@
 
 class CListDocumentFormatter : public CAbstractDocumentFormatter
 {
-public:
-
-	virtual void FormatDocument(IDocument const & document, std::ostream & out) override;
-
 protected:
 
-	virtual std::string FormatDocumentItem(CConstDocumentItem const & item, size_t position) override;
-
-private:
-
-	std::string NoEscape(std::string & str);
+	void FormatHeader(IDocument const & document, std::ostream & out) override;
+	void FormatDocumentItem(CConstDocumentItem const & item, size_t position, std::ostream & out) override;
+	void FormatFooter(std::ostream & out) override;
+	virtual void CreateDocumentFilesImpl(IDocument const & document, std::string const & path) override;
 };
-

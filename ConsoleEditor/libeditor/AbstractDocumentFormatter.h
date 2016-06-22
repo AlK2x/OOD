@@ -5,20 +5,16 @@
 class CAbstractDocumentFormatter
 {
 public:
-
-	virtual void FormatDocument(IDocument const & document, std::ostream & out) = 0;
+	void FormatDocument(IDocument const & document, std::ostream & out);
+	void CreateDocumentFiles(IDocument const & document, std::string const & path);
 
 	virtual ~CAbstractDocumentFormatter() = default;
 
 protected:
 
-	virtual std::string FormatDocumentItem(CConstDocumentItem const & item, size_t position) = 0;
+	virtual void FormatHeader(IDocument const & document, std::ostream & out) = 0;
+	virtual void FormatDocumentItem(CConstDocumentItem const & item, size_t position, std::ostream & out) = 0;
+	virtual void FormatFooter(std::ostream & out) = 0;
+	virtual void CreateDocumentFilesImpl(IDocument const & document, std::string const & path) = 0;
 
-	std::string GetFormattedString(
-		CConstDocumentItem const & item,
-		std::string paragraphPattern,
-		std::string imagePattern,
-		boost::optional<size_t> position,
-		std::function<std::string(std::string&)> escapeFn
-	);
 };

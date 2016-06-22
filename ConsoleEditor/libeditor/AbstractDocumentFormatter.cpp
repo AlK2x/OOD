@@ -3,43 +3,18 @@
 
 using boost::format;
 
-std::string CAbstractDocumentFormatter::GetFormattedString(
-	CConstDocumentItem const & item,
-	std::string paragraphPattern,
-	std::string imagePattern,
-	boost::optional<size_t> position,
-	std::function<std::string(std::string&)> escapeFn)
+void CAbstractDocumentFormatter::FormatDocument(IDocument const & document, std::ostream & out)
 {
-	std::shared_ptr<const IImage> imagePtr = item.GetImage();
-	std::shared_ptr<const IParagraph> paragraphPtr = item.GetParagraph();
-
-	if (paragraphPtr != nullptr)
+	FormatHeader(document, out);
+	for (size_t i = 0; i < document.GetItemsCount(); ++i)
 	{
-		std::string paragraphText = paragraphPtr->GetText();
-		format fmt(paragraphPattern);
-		fmt % escapeFn(paragraphText);
-		if (position)
-		{
-			fmt % position.get();
-		}
-		return fmt.str();
+		FormatDocumentItem(document.GetItem(i), i, out);
 	}
+	FormatFooter(out);
+}
 
-	if (imagePtr != nullptr)
-	{
-		
-		format fmt(imagePattern);
-		fmt % imagePtr->GetWidth();
-		fmt % imagePtr->GetHeight();
-		fmt % imagePtr->GetPath().string();
-		if (position)
-		{
-			fmt % position.get();
-		}
-
-		return fmt.str();
-	}
-
-	return "";
+void CAbstractDocumentFormatter::CreateDocumentFiles(IDocument const & document, std::string const & path)
+{
+	CreateDocumentFilesImpl(document, path);
 }
 

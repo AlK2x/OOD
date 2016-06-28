@@ -28,12 +28,12 @@ void CEquationSolver::Solve(std::shared_ptr<CHarmonicEquation> func)
     qDebug() << m_yMin << " " << m_yMax;
 }
 
-QVector<double> CEquationSolver::GetXPoints()
+const QVector<double> & CEquationSolver::GetXPoints()
 {
     return m_x;
 }
 
-QVector<double> CEquationSolver::GetYPoints()
+const QVector<double> & CEquationSolver::GetYPoints()
 {
     return m_y;
 }

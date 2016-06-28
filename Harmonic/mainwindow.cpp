@@ -30,54 +30,22 @@ MainWindow::MainWindow(QWidget *parent) :
             this,
             SLOT(OnFunctionListClick(QModelIndex))
             );
+
+    m_tableModel = new QStandardItemModel;
+
+    QStringList horizontalHeader;
+    horizontalHeader.append("x");
+    horizontalHeader.append("y");
+    m_tableModel->setHorizontalHeaderLabels(horizontalHeader);
+
+    ui->tableView->setModel(m_tableModel);
+    ui->tableView->setColumnWidth(0, (ui->tableView->width() / 3));
+    ui->tableView->setColumnWidth(1, ui->tableView->width() / 3);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-
-    double a = -1; //Начало интервала, где рисуем график по оси Ox
-    double b =  1; //Конец интервала, где рисуем график по оси Ox
-    double h = 0.01; //Шаг, с которым будем пробегать по оси Ox
-
-    int N=(b-a)/h + 2; //Вычисляем количество точек, которые будем отрисовывать
-    QVector<double> x(N), y(N); //Массивы координат точек
-
-    //Вычисляем наши данные
-    int i=0;
-    for (double X=a; X<=b; X+=h)//Пробегаем по всем точкам
-    {
-        x[i] = X;
-        y[i] = X*X;//Формула нашей функции
-        i++;
-    }
-
-    ui->widget->clearGraphs();
-    ui->widget->addGraph();
-
-    ui->widget->graph(0)->setData(x, y);
-    ui->widget->xAxis->setLabel("x");
-    ui->widget->yAxis->setLabel("y");
-
-    ui->widget->xAxis->setRange(a, b);
-
-
-    //Для показа границ по оси Oy сложнее, так как надо по правильному
-    //вычислить минимальное и максимальное значение в векторах
-    double minY = y[0], maxY = y[0];
-    for (int i=1; i<N; i++)
-    {
-        if (y[i]<minY) minY = y[i];
-        if (y[i]>maxY) maxY = y[i];
-    }
-    //ui->widget->yAxis->setRange(minY, maxY);//Для оси Oy
-
-    //И перерисуем график на нашем widget
-    ui->widget->replot();
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -203,21 +171,27 @@ void MainWindow::DrawFunction(const QModelIndex &index)
 
     auto func = m_funcList.at(row);
     m_solver->Solve(func);
-
     ui->widget->clearGraphs();
-
     ui->widget->addGraph();
-
     ui->widget->graph(0)->setData(m_solver->GetXPoints(), m_solver->GetYPoints());
     ui->widget->xAxis->setLabel("x");
     ui->widget->yAxis->setLabel("y");
-
     ui->widget->xAxis->setRange(m_solver->GetMinX(), m_solver->GetMaxX());
-
-    ui->widget->yAxis->setRange(m_solver->GetMinY(), m_solver->GetMaxY());//Для оси Oy
-
-    //И перерисуем график на нашем widget
+    ui->widget->yAxis->setRange(m_solver->GetMinY(), m_solver->GetMaxY());
     ui->widget->replot();
+
+    auto x = m_solver->GetXPoints();
+    auto y = m_solver->GetYPoints();
+
+    QStandardItem *item;
+    for (int i = 0; i < x.size(); ++i)
+    {
+        item = new QStandardItem(QString::number(x[i]));
+        m_tableModel->setItem(i, 0, item);
+
+        item = new QStandardItem(QString::number(y[i]));
+        m_tableModel->setItem(i, 1, item);
+    }
 }
 
 

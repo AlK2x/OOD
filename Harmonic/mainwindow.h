@@ -8,6 +8,8 @@
 #include "equationsolver.h"
 #include <QStringListModel>
 #include <QStringList>
+#include <QStandardItemModel>
+#include <QStandardItem>
 
 
 namespace Ui {
@@ -27,7 +29,6 @@ public slots:
 
 
 private slots:
-    void on_pushButton_clicked();
     void on_pushButton_2_clicked();
     void on_deleteFunction_clicked();
     void on_amplitude_editingFinished();
@@ -48,6 +49,7 @@ private:
 
     QVector<std::shared_ptr<CHarmonicEquation>> m_funcList;
     QStringListModel * m_funcModel;
+    QStandardItemModel * m_tableModel;
     QStringList * m_funcStrList;
     CEquationSolver * m_solver;
 };

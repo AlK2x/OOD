@@ -14,8 +14,8 @@ public:
 
     void Solve(std::shared_ptr<CHarmonicEquation> func);
 
-    QVector<double> GetXPoints();
-    QVector<double> GetYPoints();
+    const QVector<double> & GetXPoints();
+    const QVector<double> & GetYPoints();
 
     double GetMinX() const;
     double GetMaxX() const;

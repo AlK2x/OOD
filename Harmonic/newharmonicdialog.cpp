@@ -15,9 +15,9 @@ NewHarmonicDialog::NewHarmonicDialog(QWidget *parent) :
 
 void NewHarmonicDialog::accept()
 {
-    float amp = ui->amplitude->text().toFloat();
-    float friquency = ui->friquency->text().toFloat();
-    float phase = ui->phase->text().toFloat();
+    double amp = ui->amplitude->text().toDouble();
+    double friquency = ui->friquency->text().toDouble();
+    double phase = ui->phase->text().toDouble();
     HarmonicFunction func = (ui->sinFunc->isChecked()) ? HarmonicFunction::sin : HarmonicFunction::cos;
 
     std::shared_ptr<CHarmonicEquation> pEquation = std::make_shared<CHarmonicEquation>(func);

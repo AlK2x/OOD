@@ -14,24 +14,27 @@ public:
 
     void Solve(std::shared_ptr<CHarmonicEquation> func);
 
-    QVector<float> GetXPoints();
-    QVector<float> GetYPoints();
+    QVector<double> GetXPoints();
+    QVector<double> GetYPoints();
 
-    float GetMinX() const;
-    float GetMaxX() const;
+    double GetMinX() const;
+    double GetMaxX() const;
 
-    float GetMinY() const;
-    float GetMaxY() const;
+    double GetMinY() const;
+    double GetMaxY() const;
 
 private:
     std::shared_ptr<CHarmonicEquation> m_pFunc;
 
-    float m_xMin = 0.0;
-    float m_xMax = 10.0;
-    float m_step = 0.01;
+    double m_xMin = 0.0;
+    double m_xMax = 10.0;
+    double m_step = 0.01;
 
-    QVector<float> m_x;
-    QVector<float> m_y;
+    double m_yMin;
+    double m_yMax;
+
+    QVector<double> m_x;
+    QVector<double> m_y;
 };
 
 #endif // CEQUATIONSOLVER_H

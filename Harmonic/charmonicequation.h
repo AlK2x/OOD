@@ -15,26 +15,29 @@ enum class HarmonicFunction
 class CHarmonicEquation
 {
 public:
-    CHarmonicEquation();
     CHarmonicEquation(HarmonicFunction func);
 
-    void SetAmplitude(float amplitude);
-    void SetFriquence(float friquency);
-    void SetPhase(float phase);
+    void SetAmplitude(double amplitude);
+    void SetFriquence(double friquency);
+    void SetPhase(double phase);
+    void SetFunction(HarmonicFunction function);
 
-    float Solve(float x);
+    double GetAmplitude() const;
+    double GetFriquency() const;
+    double GetPhase() const;
+    HarmonicFunction GetFunction() const;
+
+    double Solve(double x);
 
     QString ToString() const;
 
 private:
     HarmonicFunction m_function;
-    float m_amplitude;
-    float m_friquency;
-    float m_phase;
+    double m_amplitude;
+    double m_friquency;
+    double m_phase;
 
     std::function<qreal(qreal)> m_funcCaller;
 };
-
-Q_DECLARE_METATYPE(CHarmonicEquation);
 
 #endif // CHARMONICEQUATION_H

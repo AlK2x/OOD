@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <boost/format.hpp>
+#include <QString>
 
 enum class HarmonicFunction
 {
@@ -14,19 +15,26 @@ enum class HarmonicFunction
 class CHarmonicEquation
 {
 public:
+    CHarmonicEquation();
     CHarmonicEquation(HarmonicFunction func);
 
     void SetAmplitude(float amplitude);
     void SetFriquence(float friquency);
     void SetPhase(float phase);
 
-    std::string ToString() const;
+    float Solve(float x);
+
+    QString ToString() const;
 
 private:
     HarmonicFunction m_function;
     float m_amplitude;
     float m_friquency;
     float m_phase;
+
+    std::function<qreal(qreal)> m_funcCaller;
 };
+
+Q_DECLARE_METATYPE(CHarmonicEquation);
 
 #endif // CHARMONICEQUATION_H

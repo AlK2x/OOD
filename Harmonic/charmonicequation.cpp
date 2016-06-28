@@ -1,8 +1,16 @@
 #include "charmonicequation.h"
+#include <functional>
+#include <qmath.h>
+
+CHarmonicEquation::CHarmonicEquation()
+    :m_function(HarmonicFunction::sin)
+{
+}
 
 CHarmonicEquation::CHarmonicEquation(HarmonicFunction func)
     :m_function(func), m_amplitude(1), m_friquency(1), m_phase(0)
 {
+    m_funcCaller = (func == HarmonicFunction::cos) ? qCos : qSin;
 }
 
 void CHarmonicEquation::SetAmplitude(float amplitude)
@@ -20,7 +28,12 @@ void CHarmonicEquation::SetPhase(float phase)
     m_phase = phase;
 }
 
-std::string CHarmonicEquation::ToString() const
+float CHarmonicEquation::Solve(float x)
+{
+    return m_amplitude * m_funcCaller(x * m_friquency + m_phase);
+}
+
+QString CHarmonicEquation::ToString() const
 {
     std::string funcName;
     switch (m_function)
@@ -37,10 +50,10 @@ std::string CHarmonicEquation::ToString() const
     }
 
     std::ostringstream ss;
-    ss << boost::format("%1%*%2%(%3%*x+%4%")
+    ss << boost::format("%1%*%2%(%3%*x+%4%)")
                 % m_amplitude
                 % funcName
                 % m_friquency
                 % m_phase;
-    return ss.str();
+    return QString(ss.str().c_str());
 }

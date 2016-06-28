@@ -7,6 +7,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    m_harmonicDialog = std::make_unique<NewHarmonicDialog>(this);
+
+    m_funcModel = new CHarmonicFunctionListModel(this);
+    ui->functionList->setModel(m_funcModel);
+
+    connect(&(*m_harmonicDialog),
+            SIGNAL(AddNewHarmonic(std::shared_ptr<CHarmonicEquation>)),
+            this,
+            SLOT(testFunc(std::shared_ptr<CHarmonicEquation>))
+    );
 }
 
 MainWindow::~MainWindow()
@@ -16,6 +26,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+
     double a = -1; //Начало интервала, где рисуем график по оси Ox
     double b =  1; //Конец интервала, где рисуем график по оси Ox
     double h = 0.01; //Шаг, с которым будем пробегать по оси Ox
@@ -58,6 +69,19 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    m_harmonicDialog = std::make_unique<NewHarmonicDialog>(this);
     m_harmonicDialog->show();
+}
+
+void MainWindow::testFunc(std::shared_ptr<CHarmonicEquation> pFunc)
+{
+    int row = m_funcModel->rowCount(QModelIndex());
+    m_funcModel->insertRows(row, 1, QModelIndex());
+    QModelIndex index = m_funcModel->index(row);
+
+    m_funcModel->setData(index, QVariant(pFunc.get()), Qt::EditRole);
+
+    ui->functionList->setCurrentIndex(index);
+
+
+    qDebug() << "Get func: " << pFunc->ToString();
 }

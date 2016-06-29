@@ -1,6 +1,7 @@
 #pragma once
 #include "Point.h"
 #include "LineStyle.h"
+#include "FillStyle.h"
 #include <vector>
 
 class ICanvas

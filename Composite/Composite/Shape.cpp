@@ -20,3 +20,4 @@ boost::optional<SFillStyle> CShape::GetFillStyle() const
 {
 	return m_fillStyle;
 }
+

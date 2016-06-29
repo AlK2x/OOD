@@ -1,17 +1,18 @@
 #pragma once
-#include "ICanvas.h"
+#include "IDrawable.h"
 #include "LineStyle.h"
-#include "Rectangle.h"
-#include <boost\optional.hpp>
+#include "FillStyle.h"
 
-class IDrawable
+class CRectangle;
+class CShape;
+
+typedef std::shared_ptr<CShape> pShape;
+
+
+class CShape : public IDrawable
 {
 public:
-	virtual void Draw(ICanvas & canvas) const = 0;
-};
-
-class CShape
-{
+	
 public:
 
 	virtual void SetLineStyle(SLineStyle style);
@@ -27,5 +28,6 @@ public:
 protected:
 	boost::optional<SLineStyle> m_lineStyle;
 	boost::optional<SFillStyle> m_fillStyle;
+	
 };
 

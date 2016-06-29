@@ -33,14 +33,17 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Source Files\Style</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Source Files\Style</Filter>
+    </ClInclude>
     <ClInclude Include="LineStyle.h">
       <Filter>Source Files\Style</Filter>
     </ClInclude>
-    <ClInclude Include="ICanvas.h">
-      <Filter>Source Files\Canvas</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
-      <Filter>Source Files\Shape</Filter>
+    <ClInclude Include="FillStyle.h">
+      <Filter>Source Files\Style</Filter>
     </ClInclude>
     <ClInclude Include="Shape.h">
       <Filter>Source Files\Shape</Filter>
@@ -48,8 +51,17 @@
     <ClInclude Include="Rectangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Polygon.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ICanvas.h">
+      <Filter>Source Files\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="IDrawable.h">
+      <Filter>Source Files\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="ISlide.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupShape.h">
+      <Filter>Source Files\Shape</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -65,8 +77,8 @@
     <ClCompile Include="Rectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Polygon.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GroupShape.cpp">
+      <Filter>Source Files\Shape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

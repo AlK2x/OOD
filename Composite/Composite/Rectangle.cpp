@@ -1,14 +1,19 @@
 #include "stdafx.h"
 #include "Rectangle.h"
 
-
 CRectangle::CRectangle(SPoint leftTop, SPoint rightBottom)
 	:m_leftTop(leftTop), m_rightBottom(rightBottom)
 {
 }
 
-CRectangle::~CRectangle()
+SPoint CRectangle::GetLeftTop() const
 {
+	return m_leftTop;
+}
+
+SPoint CRectangle::GetRightBottom() const
+{
+	return m_rightBottom;
 }
 
 void CRectangle::Draw(ICanvas & canvas) const
@@ -16,7 +21,8 @@ void CRectangle::Draw(ICanvas & canvas) const
 	boost::optional<SLineStyle> lineStyle = GetLineStyle();
 	if (lineStyle)
 	{
-		//canvas.SetPenColor(lineStyle.get().color);
+		canvas.SetPenColor(lineStyle->color);
+		canvas.SetPenThickness(lineStyle->thickness);
 	}
 
 	SPoint rightTop = { m_rightBottom.x, m_leftTop.y };
@@ -29,5 +35,7 @@ void CRectangle::Draw(ICanvas & canvas) const
 
 CRectangle CRectangle::GetFrame()
 {
-	return CRectangle(m_leftTop, m_rightBottom);
+	CRectangle rect(m_leftTop, m_rightBottom);
+	return rect;
 }
+

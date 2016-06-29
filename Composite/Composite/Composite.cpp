@@ -2,6 +2,7 @@
 #include "Rectangle.h"
 #include "GroupShape.h"
 #include "Point.h"
+#include "Canvas.h"
 
 using namespace std;
 
@@ -34,6 +35,10 @@ int main()
 	CRectangle frame = group.GetFrame();
 	cout << "x1: " << frame.GetLeftTop().x << " y1: " << frame.GetLeftTop().y  << endl;
 	cout << "x2: " << frame.GetRightBottom().x << " y2: " << frame.GetRightBottom().y << endl;
+
+	CCanvas canvas;
+
+	group.Draw(canvas);
 
     return 0;
 }

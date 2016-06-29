@@ -1,48 +1,60 @@
 #include "equationsolver.h"
 #include <functional>
+#include <QDebug>
 
 CEquationSolver::CEquationSolver()
 {
-    m_x.reserve(1000);
-    m_y.reserve(1000);
+    int size = static_cast<int>((m_xMax - m_xMin) / m_step) + 2;
+    m_x.resize(size);
+    m_y.resize(size);
 }
 
 void CEquationSolver::Solve(std::shared_ptr<CHarmonicEquation> func)
 {
-    for (float i = m_xMin; i < m_xMax ;i += m_step)
+    int j = 0;
+
+    for (double i = m_xMin; i < m_xMax ;i += m_step, ++j)
     {
-        m_x.push_back(i);
-        m_y.push_back(func->Solve(i));
+        m_x[j] = i;
+        m_y[j] = func->Solve(i);
     }
+
+    m_yMin = m_yMax = m_y[0];
+    for (int i = 0; i < m_y.size(); ++i)
+    {
+        if (m_y[i] < m_yMin) m_yMin = m_y[i];
+        if (m_y[i] > m_yMax) m_yMax = m_y[i];
+    }
+    qDebug() << m_yMin << " " << m_yMax;
 }
 
-QVector<float> CEquationSolver::GetXPoints()
+const QVector<double> & CEquationSolver::GetXPoints()
 {
     return m_x;
 }
 
-QVector<float> CEquationSolver::GetYPoints()
+const QVector<double> & CEquationSolver::GetYPoints()
 {
     return m_y;
 }
 
-float CEquationSolver::GetMinX() const
+double CEquationSolver::GetMinX() const
 {
     return m_xMin;
 }
 
-float CEquationSolver::GetMaxX() const
+double CEquationSolver::GetMaxX() const
 {
     return m_xMax;
 }
 
-float CEquationSolver::GetMinY() const
+double CEquationSolver::GetMinY() const
 {
-    return -1.0;
+    return m_yMin;
 }
 
-float CEquationSolver::GetMaxY() const
+double CEquationSolver::GetMaxY() const
 {
-    return 1.0;
+    return m_yMax;
 }
 

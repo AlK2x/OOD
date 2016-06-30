@@ -170,7 +170,7 @@ void MainWindow::DrawFunction(const QModelIndex &index)
     }
 
     auto func = m_funcList.at(row);
-    m_solver->Solve(func);
+    m_solver->Solve(m_funcList);
     ui->widget->clearGraphs();
     ui->widget->addGraph();
     ui->widget->graph(0)->setData(m_solver->GetXPoints(), m_solver->GetYPoints());

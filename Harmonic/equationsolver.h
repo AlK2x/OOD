@@ -12,7 +12,7 @@ class CEquationSolver
 public:
     CEquationSolver();
 
-    void Solve(std::shared_ptr<CHarmonicEquation> func);
+    void Solve(QVector<std::shared_ptr<CHarmonicEquation>> m_funcList);
 
     const QVector<double> & GetXPoints();
     const QVector<double> & GetYPoints();

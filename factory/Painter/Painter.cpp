@@ -22,28 +22,33 @@ int main()
 	CShapeFactory f;
 	CDesigner designer(f);
 	//auto draft = designer.CreateDraft(ss);
-	auto draft = designer.CreateDraft(cin);
-
-	while (window.isOpen())
+	try
 	{
-		sf::Event event;
-		while (window.pollEvent(event))
+		auto draft = designer.CreateDraft(cin);
+		while (window.isOpen())
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
+			sf::Event event;
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+					window.close();
+			}
 
-		window.clear();
-		for (const auto & s : draft)
-		{
-			s.Draw(canvas);
-			//window.display();
+			window.clear();
+			for (const auto & s : draft)
+			{
+				s.Draw(canvas);
+				//window.display();
+			}
+			window.display();
+
 		}
-		window.display();
-		
 	}
-
-	
+	catch (std::exception & e)
+	{
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
 	
 	return 0;
 }

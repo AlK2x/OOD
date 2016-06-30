@@ -8,6 +8,21 @@ struct Picture_draft_
 	CPictureDraft draft;
 };
 
+class CMockShape_2 : public CShape
+{
+public:
+	CMockShape_2(const string& descr = "")
+		:descr(descr)
+	{
+	}
+	string descr;
+
+	virtual void Draw(ICanvas & canvas) const override
+	{
+		(void)canvas;
+	}
+};
+
 BOOST_FIXTURE_TEST_SUITE(Picture_draft, Picture_draft_)
 	BOOST_AUTO_TEST_SUITE(by_default)
 		BOOST_AUTO_TEST_CASE(is_empty)
@@ -22,11 +37,11 @@ BOOST_FIXTURE_TEST_SUITE(Picture_draft, Picture_draft_)
 
 	struct after_adding_a_shape_ : Picture_draft_
 	{
-		unique_ptr<CShape> shape1 = make_unique<CShape>();
+		unique_ptr<CShape> shape1 = make_unique<CMockShape_2>();
 		CShape & refShape1 = *shape1;
-		unique_ptr<CShape> shape2 = make_unique<CShape>();
+		unique_ptr<CShape> shape2 = make_unique<CMockShape_2>();
 		CShape & refShape2 = *shape2;
-		unique_ptr<CShape> shape3 = make_unique<CShape>();
+		unique_ptr<CShape> shape3 = make_unique<CMockShape_2>();
 		CShape & refShape3 = *shape3;
 
 		after_adding_a_shape_()

@@ -15,6 +15,11 @@ public:
 	{
 	}
 	string descr;
+
+	virtual void Draw(ICanvas & canvas) const override
+	{
+		(void)canvas;
+	}
 };
 
 struct MockShapeFactory : IShapeFactory

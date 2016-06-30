@@ -13,8 +13,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 TARGET = Harmonic
 TEMPLATE = app
 
-INCLUDEPATH += C:/SDK/boost/
-LIBS += "-LC:/SDK/boost/stage/lib/"
+INCLUDEPATH += C:/sdk/boost_1_57_0/
+LIBS += "-LC:/sdk/boost_1_57_0/stage/lib/"
 
 SOURCES += main.cpp\
         mainwindow.cpp \

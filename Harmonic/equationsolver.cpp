@@ -10,6 +10,7 @@ CEquationSolver::CEquationSolver()
     m_y.fill(0.0);
 }
 
+
 void CEquationSolver::Solve(QVector<std::shared_ptr<CHarmonicEquation>> m_funcList)
 {
     int j = 0;

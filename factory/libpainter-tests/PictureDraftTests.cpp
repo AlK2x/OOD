@@ -1,26 +1,12 @@
 #include "stdafx.h"
 #include "../libpainter/PictureDraft.h"
 #include "../libpainter/Shape.h"
+#include "MochShape.h"
 
 using namespace std;
 struct Picture_draft_
 {
 	CPictureDraft draft;
-};
-
-class CMockShape_2 : public CShape
-{
-public:
-	CMockShape_2(const string& descr = "")
-		:descr(descr)
-	{
-	}
-	string descr;
-
-	virtual void Draw(ICanvas & canvas) const override
-	{
-		(void)canvas;
-	}
 };
 
 BOOST_FIXTURE_TEST_SUITE(Picture_draft, Picture_draft_)
@@ -37,11 +23,11 @@ BOOST_FIXTURE_TEST_SUITE(Picture_draft, Picture_draft_)
 
 	struct after_adding_a_shape_ : Picture_draft_
 	{
-		unique_ptr<CShape> shape1 = make_unique<CMockShape_2>();
+		unique_ptr<CShape> shape1 = make_unique<CMockShape>("");
 		CShape & refShape1 = *shape1;
-		unique_ptr<CShape> shape2 = make_unique<CMockShape_2>();
+		unique_ptr<CShape> shape2 = make_unique<CMockShape>("");
 		CShape & refShape2 = *shape2;
-		unique_ptr<CShape> shape3 = make_unique<CMockShape_2>();
+		unique_ptr<CShape> shape3 = make_unique<CMockShape>("");
 		CShape & refShape3 = *shape3;
 
 		after_adding_a_shape_()

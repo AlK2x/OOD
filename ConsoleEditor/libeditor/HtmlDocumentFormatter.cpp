@@ -87,7 +87,7 @@ void CHtmlDocumentFormatter::FormatDocumentItem(CConstDocumentItem const & item,
 
 	if (paragraphPtr != nullptr)
 	{
-		out << boost::format(R"(<p>%1%</p>)") % paragraphPtr->GetText() << std::endl;
+		out << boost::format(R"(<p>%1%</p>)") % EscapeHtmlEntities(paragraphPtr->GetText()) << std::endl;
 	}
 
 	if (imagePtr != nullptr)
